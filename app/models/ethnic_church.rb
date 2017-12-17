@@ -1,0 +1,2 @@
+class EthnicChurch < ApplicationRecord
+end
