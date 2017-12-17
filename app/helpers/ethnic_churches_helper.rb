@@ -1,0 +1,2 @@
+module EthnicChurchesHelper
+end
