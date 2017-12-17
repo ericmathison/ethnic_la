@@ -1,0 +1,14 @@
+%table
+  %tr
+    %th
+      %strong Church Name
+    %th Language
+    %th City
+    %th Website/Email
+  - @ethnic_churches.each do |church|
+    %tr
+      %td
+        %strong= church.name
+      %td= church.language
+      %td= church.city
+      %td= church.website
