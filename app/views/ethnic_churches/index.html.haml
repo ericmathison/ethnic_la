@@ -1,14 +1,24 @@
-%table
-  %tr
-    %th
-      %strong Church Name
-    %th Language
-    %th City
-    %th Website/Email
-  - @ethnic_churches.each do |church|
-    %tr
-      %td
-        %strong= church.name
-      %td= church.language
-      %td= church.city
-      %td= church.website
+%header
+  %nav{class: "navbar navbar-expand-md navbar-dark fixed-top bg-dark"}
+    %a{class: "navbar-brand", href: "#"} Ethnic Churches
+
+%div{class: "container-fluid"}
+  %div{class: "row"}
+    %nav{class: "col-sm-3 col-md-2 d-none d-sm-block bg-light sidebar"}
+    %main{role: "main", class: "col-sm-9 ml-sm-auto col-md-10 primary-content"}
+      %div{class: "table-responsive"}
+        %table{class: "table table-striped"}
+          %thead
+            %tr
+              %th
+                %strong Church Name
+              %th Language
+              %th City
+              %th Website/Email
+          %tbody
+            - @ethnic_churches.each do |church|
+              %tr
+                %td= church.name
+                %td= church.language
+                %td= church.city
+                %td= church.website
