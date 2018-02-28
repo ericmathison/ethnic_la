@@ -3,6 +3,12 @@
     %nav{class: "col-sm-3 col-md-2 d-none d-sm-block bg-light sidebar"}
     %main{role: "main", class: "col-sm-9 ml-sm-auto col-md-10 primary-content"}
       %div{class: "table-responsive"}
+        - if notice
+          %p{class: "alert alert-info"}
+            = notice
+        - if alert
+          %p{class: "alert alert-warning"}
+            = alert
         %h1{class: "mb-5"} Los Angeles Area Ethnic Churches
         %table{class: "table table-striped"}
           %thead
@@ -19,3 +25,8 @@
                 %td= church.language
                 %td= church.city
                 %td= church.website
+%footer
+  - if admin_signed_in?
+    = link_to('Logout', destroy_admin_session_path, method: :delete)
+  - else
+    = link_to('Admin Login', new_admin_session_path)
