@@ -1,0 +1,13 @@
+los_angeles:
+  street: '1234 Foo St.'
+  city: Los Angeles
+  state: CA
+  zip: 90013
+  ethnic_church_id: 1
+
+santa_monica:
+  street: '4567 Bar St.'
+  city: Santa Monica
+  state: CA
+  zip: 90401
+  ethnic_church_id: 2

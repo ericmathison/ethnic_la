@@ -1,13 +1,13 @@
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
 foobar:
+  id: 1
   name: Foobar Church
-  language: Chinese
-  city: Monterey Park
   website: 'http://example.com'
+  language_id: 1
 
 bazquux:
+  id: 2
   name: Bazquux Church
-  language: Khmer
-  city: Long Beach
   website: 'http://example2.com'
+  language_id: 2

@@ -10,10 +10,19 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20171221230118) do
+ActiveRecord::Schema.define(version: 20180228075818) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "addresses", force: :cascade do |t|
+    t.string "street"
+    t.string "city"
+    t.string "state"
+    t.string "zip"
+    t.bigint "ethnic_church_id"
+    t.index ["ethnic_church_id"], name: "index_addresses_on_ethnic_church_id"
+  end
 
   create_table "admins", force: :cascade do |t|
     t.string "email", default: "", null: false
@@ -32,21 +41,43 @@ ActiveRecord::Schema.define(version: 20171221230118) do
     t.index ["reset_password_token"], name: "index_admins_on_reset_password_token", unique: true
   end
 
-  create_table "ethnic_churches", force: :cascade do |t|
+  create_table "countries", force: :cascade do |t|
     t.string "name"
-    t.string "street"
-    t.string "city"
-    t.string "state"
-    t.string "zip"
-    t.string "phone"
-    t.string "website"
-    t.string "language"
-    t.string "country"
-    t.string "religious_background"
-    t.string "pastors_name"
-    t.text "notes"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
   end
 
+  create_table "ethnic_churches", force: :cascade do |t|
+    t.string "name"
+    t.string "phone"
+    t.string "website"
+    t.string "pastors_name"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.string "email"
+    t.bigint "language_id"
+    t.bigint "country_id"
+    t.bigint "religious_background_id"
+    t.index ["country_id"], name: "index_ethnic_churches_on_country_id"
+    t.index ["language_id"], name: "index_ethnic_churches_on_language_id"
+    t.index ["religious_background_id"], name: "index_ethnic_churches_on_religious_background_id"
+  end
+
+  create_table "languages", force: :cascade do |t|
+    t.string "name"
+  end
+
+  create_table "notes", force: :cascade do |t|
+    t.string "content"
+    t.bigint "ethnic_church_id"
+    t.index ["ethnic_church_id"], name: "index_notes_on_ethnic_church_id"
+  end
+
+  create_table "religious_backgrounds", force: :cascade do |t|
+    t.string "persuasion"
+  end
+
+  add_foreign_key "addresses", "ethnic_churches"
+  add_foreign_key "ethnic_churches", "countries"
+  add_foreign_key "ethnic_churches", "languages"
+  add_foreign_key "ethnic_churches", "religious_backgrounds"
+  add_foreign_key "notes", "ethnic_churches"
 end
