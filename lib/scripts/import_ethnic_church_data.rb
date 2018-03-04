@@ -19,10 +19,14 @@ CSV.foreach(ARGV[0], headers: headers) do |csv|
   address = hash.slice(:street, :city, :state, :zip)
 
   EthnicChurch.transaction do
+    language = Language.find_or_initialize_by({name: language[:language]})
+    country = Country.find_or_initialize_by({name: country[:country]})
+    religious_background = ReligiousBackground.find_or_initialize_by({persuasion: religious_background[:religious_background]})
+
     ethnic_church = EthnicChurch.new(ethnic_church)
-    ethnic_church.build_language({name: language[:language]})
-    ethnic_church.build_country({name: country[:country]})
-    ethnic_church.build_religious_background({persuasion: religious_background[:religious_background]})
+    ethnic_church.language = language
+    ethnic_church.country = country
+    ethnic_church.religious_background = religious_background
     ethnic_church.build_note({content: notes[:notes]})
     ethnic_church.build_address(address)
     ethnic_church.save!
