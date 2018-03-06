@@ -1,6 +1,9 @@
 %div{class: "container-fluid"}
   %div{class: "row"}
     %nav{class: "col-sm-3 col-md-2 d-none d-sm-block bg-light sidebar"}
+      %p.sidebar-title
+        %strong
+          Languages
       - @languages.each do |lang|
         %p= link_to(lang[:name] || 'Unknown', language_path(lang[:id]))
     %main{role: "main", class: "col-sm-9 ml-sm-auto col-md-10 primary-content"}
@@ -11,7 +14,7 @@
         - if alert
           %p{class: "alert alert-warning"}
             = alert
-        %h1{class: "mb-5"} Los Angeles Area Ethnic Churches
+        %h2{class: "mb-5"} Los Angeles Area Ethnic Churches
         %table{class: "table table-striped"}
           %thead
             %tr

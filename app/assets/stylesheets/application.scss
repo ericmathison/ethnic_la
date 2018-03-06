@@ -23,3 +23,35 @@ nav.sidebar, .primary-content {
   width: 400px;
   margin: 0 auto;
 }
+
+h1, h2 {
+  font-family: 'Passion One', Helvetica;
+}
+
+h1 {
+  font-size: 75px;
+  padding-top: 5px;
+}
+
+h3 {
+  font-size: 18px;
+}
+
+.logo {
+  background: image-url('world157x153.png') no-repeat;
+  background-position: 100px 0;
+  text-align: center;
+  height: 150px;
+}
+
+.subtitle {
+  padding-top: 0;
+  padding-left: 260px;
+  margin-top: -75px;
+  line-height: 20px;
+  font-size: 16px;
+}
+
+.sidebar-title {
+  text-decoration: underline;
+}

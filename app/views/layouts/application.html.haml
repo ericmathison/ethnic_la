@@ -5,8 +5,15 @@
     = csrf_meta_tags
     = stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload'
     = javascript_include_tag 'application', 'data-turbolinks-track': 'reload'
+    = stylesheet_link_tag 'application', 'https://fonts.googleapis.com/css?family=Passion+One'
   %body
     %header
-      %nav{class: "navbar navbar-expand-md navbar-dark bg-dark"}
-        = link_to 'Ethnic Churches', root_path, class: 'navbar-brand'
+      .row.justify-content-center
+        %h1.logo.col-5 Ethnic Churches
+      .row.justify-content-center
+        %p.subtitle.col-5
+          %strong
+            = 'An ethnographic research project locating ethnic'
+            %br
+            = 'groups in Los Angeles using ethnic church data'
     = yield
