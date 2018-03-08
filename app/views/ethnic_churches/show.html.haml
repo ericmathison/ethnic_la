@@ -1,13 +1,26 @@
 .row.justify-content-center
   .jumbotron.col-9
-    %h2= @ethnic_church.name
+    %h2#church_name= @ethnic_church.name
     %h3.title-with-emphasis Website:
-    %p= @ethnic_church.website || '-'
+    %p#website= @ethnic_church.website || '-'
+
     %h3.title-with-emphasis Address:
-    %p= @ethnic_church.address.full_address || '-'
+    %p#address= @ethnic_church.address.full_address || '-'
+
+    %h3.title-with-emphasis Phone:
+    %p#phone= @ethnic_church.phone || '-'
+
+    %h3.title-with-emphasis Email:
+    %p#email= @ethnic_church.email || '-'
+
+    %h3.title-with-emphasis Pastor:
+    %p#pastors_name= @ethnic_church.pastors_name || '-'
+
     %h3.title-with-emphasis Languages:
-    %p= @ethnic_church.language.name || '-'
+    %p#language= @ethnic_church.language.name || '-'
+
     %h3.title-with-emphasis Associated Country:
-    %p= @ethnic_church.country.name || '-'
+    %p#country= @ethnic_church.country.name || '-'
+
     %h3.title-with-emphasis Religious Background:
-    %p= @ethnic_church.religious_background.persuasion || '-'
+    %p#religious_background= @ethnic_church.religious_background.persuasion || '-'

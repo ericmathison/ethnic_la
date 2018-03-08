@@ -4,6 +4,9 @@ foobar:
   id: 1
   name: Foobar Church
   website: 'http://example.com'
+  phone: '1234567890'
+  email: foo@bar.com
+  pastors_name: Joe
   language_id: 1
   country_id: 1
   religious_background_id: 1
@@ -12,6 +15,9 @@ bazquux:
   id: 2
   name: Bazquux Church
   website: 'http://example2.com'
+  phone: '0987654321'
+  email: bar@foo.com
+  pastors_name: Bob
   language_id: 2
   country_id: 2
   religious_background_id: 2
