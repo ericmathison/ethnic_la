@@ -1,6 +1,13 @@
-%p= @ethnic_church.name
-%p= @ethnic_church.website
-%p= @ethnic_church.address.street
-%p= @ethnic_church.language.name
-%p= @ethnic_church.country.name
-%p= @ethnic_church.religious_background.persuasion
+.row.justify-content-center
+  .jumbotron.col-9
+    %h2= @ethnic_church.name
+    %h3.title-with-emphasis Website:
+    %p= @ethnic_church.website || '-'
+    %h3.title-with-emphasis Address:
+    %p= @ethnic_church.address.full_address || '-'
+    %h3.title-with-emphasis Languages:
+    %p= @ethnic_church.language.name || '-'
+    %h3.title-with-emphasis Associated Country:
+    %p= @ethnic_church.country.name || '-'
+    %h3.title-with-emphasis Religious Background:
+    %p= @ethnic_church.religious_background.persuasion || '-'
