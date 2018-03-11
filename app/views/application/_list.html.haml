@@ -27,7 +27,7 @@
             - @ethnic_churches.each do |church|
               %tr
                 %td= link_to(church.name, ethnic_church_path(church))
-                %td= church.language.name
+                %td.language-name= church.language.name
                 %td= church.address.city
                 %td= church.website
 %footer
