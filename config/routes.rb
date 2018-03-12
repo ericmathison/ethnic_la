@@ -4,5 +4,5 @@ Rails.application.routes.draw do
   root 'ethnic_churches#index'
 
   get 'languages/:id' => 'languages#show', as: :language
-  get 'ethnic_churches/:id' => 'ethnic_churches#show', as: :ethnic_church
+  resources :ethnic_churches
 end
