@@ -4,14 +4,18 @@ class CreateTest < ApplicationSystemTestCase
   test 'successfully creates an ethnic church and associated objects' do
     visit new_ethnic_church_path
 
-    church_name = 'Coptic Church of Footown'
+    church_name = 'Chinese Church of Footown'
     phone = '1234567890'
     website = 'https://example.com/'
     pastors_name = 'John Doe'
     email = 'foo@example.com'
-    language = 'Arabic'
+
+    #use an existing language name to ensure application can handle re-using
+    #language names
+    language = languages(:chinese).name
+
     country = 'Egypt'
-    religious_background = 'Coptic'
+    religious_background = 'protestant'
     street = '1234 Foostreet'
     city = 'Footown'
     zip = '99999'
