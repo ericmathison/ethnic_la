@@ -14,7 +14,9 @@ class CreateTest < ApplicationSystemTestCase
     #language names
     language = languages(:chinese).name
 
-    country = 'Egypt'
+    # using an existing country name
+    country = countries(:china).name
+
     religious_background = 'protestant'
     street = '1234 Foostreet'
     city = 'Footown'
