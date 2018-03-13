@@ -1,0 +1,7 @@
+one:
+  content: 'This is a note'
+  ethnic_church_id: 1
+
+two:
+  content: 'This is another note'
+  ethnic_church_id: 2

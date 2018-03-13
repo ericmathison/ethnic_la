@@ -15,5 +15,6 @@ class HomePageTest < ActionDispatch::IntegrationTest
     assert_select '#language', { text: ec.language.name }
     assert_select '#country', { text: ec.country.name }
     assert_select '#religious_background', { text: ec.religious_background.persuasion }
+    assert_select '#note', { text: ec.note.content }
   end
 end
