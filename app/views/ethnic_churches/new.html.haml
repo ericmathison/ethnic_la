@@ -29,6 +29,6 @@
           = address.label :zip
           = address.text_field :zip
         = fields_for :note do |note|
-          = note.label :content
+          = note.label :note
           = note.text_field :content
         = f.submit 'Create', id: 'create'
