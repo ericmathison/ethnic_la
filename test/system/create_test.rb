@@ -59,5 +59,7 @@ class CreateTest < ApplicationSystemTestCase
     assert_equal ec.address.street, street
     assert_equal ec.address.city, city
     assert_equal ec.address.zip, zip
+
+    assert_equal find('#notice').text, 'Successfully added new Ethnic Church'
   end
 end

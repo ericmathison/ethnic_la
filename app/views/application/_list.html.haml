@@ -8,12 +8,6 @@
         %p= link_to(lang[:name] || 'Unknown', language_path(lang[:id]))
     %main{role: "main", class: "col-sm-9 ml-sm-auto col-md-10 primary-content"}
       %div{class: "table-responsive"}
-        - if notice
-          %p{class: "alert alert-info"}
-            = notice
-        - if alert
-          %p{class: "alert alert-warning"}
-            = alert
         %h2{class: "mb-5"} Los Angeles Area Ethnic Churches
         %table{class: "table table-striped"}
           %thead

@@ -16,4 +16,12 @@
             = 'An ethnographic research project locating ethnic'
             %br
             = 'groups in Los Angeles using ethnic church data'
+    .row.justify-content-center
+      .col-9
+        - if notice
+          %p#notice.alert.alert-info
+            = notice
+        - if alert
+          %p#alert.alert.alert-warning
+            = alert
     = yield
