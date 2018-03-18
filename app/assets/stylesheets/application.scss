@@ -17,6 +17,11 @@
 header {
   background: image-url('world157x153.png') no-repeat;
   background-position: calc(50% - 225px) 50%;
+  color: #000;
+}
+
+a.logo-text:hover {
+  text-decoration: none;
 }
 
 nav.sidebar, .primary-content {

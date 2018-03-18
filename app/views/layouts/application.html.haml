@@ -7,15 +7,16 @@
     = javascript_include_tag 'application', 'data-turbolinks-track': 'reload'
     = stylesheet_link_tag 'application', 'https://fonts.googleapis.com/css?family=Passion+One'
   %body
-    %header
-      .row.justify-content-center
-        %h1.logo.col-5 Ethnic Churches
-      .row.justify-content-center
-        %p.subtitle.col-5
-          %strong
-            = 'An ethnographic research project locating ethnic'
-            %br
-            = 'groups in Los Angeles using ethnic church data'
+    = link_to(root_path, class: 'logo-text') do
+      %header
+        .row.justify-content-center
+          %h1.logo.col-5 Ethnic Churches
+        .row.justify-content-center
+          %p.subtitle.col-5
+            %strong
+              = 'An ethnographic research project locating ethnic'
+              %br
+              = 'groups in Los Angeles using ethnic church data'
     .row.justify-content-center
       .col-9
         - if notice
