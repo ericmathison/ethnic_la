@@ -14,6 +14,11 @@
 
 @import "bootstrap";
 
+header {
+  background: image-url('world157x153.png') no-repeat;
+  background-position: calc(50% - 225px) 50%;
+}
+
 nav.sidebar, .primary-content {
   padding-top: 100px;
 }
@@ -38,8 +43,6 @@ h3 {
 }
 
 .logo {
-  background: image-url('world157x153.png') no-repeat;
-  background-position: 100px 0;
   text-align: center;
   height: 150px;
 }
