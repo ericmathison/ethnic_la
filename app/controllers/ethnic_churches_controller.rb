@@ -10,6 +10,7 @@ class EthnicChurchesController < ApplicationController
 
   def new
     @ethnic_church = EthnicChurch.new
+    @language_array = Language.all.map { |lang| [lang.name, lang.name] }
   end
 
   def create

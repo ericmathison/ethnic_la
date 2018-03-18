@@ -32,7 +32,7 @@ class CreateTest < ApplicationSystemTestCase
     fill_in 'ethnic_church_pastors_name', with: pastors_name
     fill_in 'ethnic_church_email', with: email
 
-    fill_in 'language_name', with: language
+    select language, from: 'language_name'
     fill_in 'country_name', with: country
     fill_in 'religious_background_persuasion', with: religious_background
 
