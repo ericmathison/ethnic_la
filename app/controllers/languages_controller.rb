@@ -1,7 +1,7 @@
 class LanguagesController < ApplicationController
   def show
     @language = Language.where(id: params[:id]).first
-    @ethnic_churches = EthnicChurch.joins(:language).where(Language.arel_table[:id].eq(@language.id))
+    @ethnic_churches = @language.ethnic_churches
     @languages = Language.list
   end
 end

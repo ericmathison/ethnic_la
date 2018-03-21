@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180304095322) do
+ActiveRecord::Schema.define(version: 20180319060536) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -54,12 +54,15 @@ ActiveRecord::Schema.define(version: 20180304095322) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.string "email"
-    t.bigint "language_id"
     t.bigint "country_id"
     t.bigint "religious_background_id"
     t.index ["country_id"], name: "index_ethnic_churches_on_country_id"
-    t.index ["language_id"], name: "index_ethnic_churches_on_language_id"
     t.index ["religious_background_id"], name: "index_ethnic_churches_on_religious_background_id"
+  end
+
+  create_table "ethnic_churches_languages", id: false, force: :cascade do |t|
+    t.bigint "ethnic_church_id", null: false
+    t.bigint "language_id", null: false
   end
 
   create_table "languages", force: :cascade do |t|
@@ -80,7 +83,6 @@ ActiveRecord::Schema.define(version: 20180304095322) do
 
   add_foreign_key "addresses", "ethnic_churches"
   add_foreign_key "ethnic_churches", "countries"
-  add_foreign_key "ethnic_churches", "languages"
   add_foreign_key "ethnic_churches", "religious_backgrounds"
   add_foreign_key "notes", "ethnic_churches"
 end

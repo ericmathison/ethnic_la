@@ -1,7 +1,8 @@
 english:
-  id: 1
   name: English
 
 chinese:
-  id: 2
   name: Chinese
+
+arabic:
+  name: Arabic

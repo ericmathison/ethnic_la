@@ -15,7 +15,15 @@ class EthnicChurchesController < ApplicationController
 
   def create
     ec = EthnicChurch.new(ethnic_church_params)
-    ec.language = Language.find_or_initialize_by(name: language_params[:name])
+
+    lang = Language.find_by(name: language_params[:name])
+
+    if lang
+      ec.languages = [lang]
+    else
+      ec.languages.build(name: language_params[:name])
+    end
+
     ec.country = Country.find_or_initialize_by(name: country_params[:name])
     ec.religious_background = ReligiousBackground.find_or_initialize_by(persuasion: religious_background_params[:persuasion])
     ec.build_address(address_params)

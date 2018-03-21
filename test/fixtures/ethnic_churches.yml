@@ -7,7 +7,7 @@ foobar:
   phone: '1234567890'
   email: foo@bar.com
   pastors_name: Joe
-  language_id: 1
+  languages: english, arabic
   country_id: 1
   religious_background_id: 1
 
@@ -18,6 +18,6 @@ bazquux:
   phone: '0987654321'
   email: bar@foo.com
   pastors_name: Bob
-  language_id: 2
+  languages: chinese
   country_id: 2
   religious_background_id: 2

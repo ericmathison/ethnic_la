@@ -53,7 +53,7 @@ class CreateTest < ApplicationSystemTestCase
     assert_equal ec.website, website
     assert_equal ec.pastors_name, pastors_name
     assert_equal ec.email, email
-    assert_equal ec.language.name, language
+    assert_equal ec.languages.first.name, language
     assert_equal ec.country.name, country
     assert_equal ec.religious_background.persuasion, religious_background
     assert_equal ec.address.street, street
