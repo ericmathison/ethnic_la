@@ -17,7 +17,7 @@
     %p#pastors_name= @ethnic_church.pastors_name || '-'
 
     %h3.title-with-emphasis Languages:
-    %p#language= @ethnic_church.languages.first.name || '-'
+    %p#language= @ethnic_church.languages.map(&:name).join(', ') || '-'
 
     %h3.title-with-emphasis Associated Country:
     %p#country= @ethnic_church.country.name || '-'
