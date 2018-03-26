@@ -10,9 +10,10 @@ class CreateTest < ApplicationSystemTestCase
     pastors_name = 'John Doe'
     email = 'foo@example.com'
 
-    #use an existing language name to ensure application can handle re-using
+    #use existing language to ensure application can handle re-using
     #language names
     language = languages(:chinese).name
+    language2 = languages(:english).name
 
     #use an existing country name
     country = countries(:china).name
@@ -33,6 +34,7 @@ class CreateTest < ApplicationSystemTestCase
     fill_in 'ethnic_church_email', with: email
 
     select language, from: 'language_name'
+    select language2, from: 'language_name'
     fill_in 'country_name', with: country
     fill_in 'religious_background_persuasion', with: religious_background
 
@@ -53,7 +55,8 @@ class CreateTest < ApplicationSystemTestCase
     assert_equal ec.website, website
     assert_equal ec.pastors_name, pastors_name
     assert_equal ec.email, email
-    assert_equal ec.languages.first.name, language
+    assert_includes ec.languages.map(&:name), language
+    assert_includes ec.languages.map(&:name), language2
     assert_equal ec.country.name, country
     assert_equal ec.religious_background.persuasion, religious_background
     assert_equal ec.address.street, street
