@@ -4,7 +4,10 @@
     %title Ethnic Churches
     = csrf_meta_tags
     = stylesheet_link_tag    'application', 'https://fonts.googleapis.com/css?family=Passion+One', media: 'all', 'data-turbolinks-track': 'reload'
+    = stylesheet_link_tag    '/chosen.min', media: 'all', 'data-turbolinks-track': 'reload'
     = javascript_include_tag 'application', 'data-turbolinks-track': 'reload'
+    = javascript_include_tag '/chosen.jquery.min', 'data-turbolinks-track': 'reload'
+    = javascript_include_tag 'ethnic_churches_form', 'data-turbolinks-track': 'reload'
   %body
     = link_to(root_path, class: 'logo-text') do
       %header
