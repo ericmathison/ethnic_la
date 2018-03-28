@@ -3,13 +3,7 @@ require 'csv'
 headers = %i[street city country website language name notes pastors_name phone religious_background state zip]
 
 CSV.foreach(ARGV[0], headers: headers) do |csv|
-  hash = csv.to_h.transform_values(&:strip).transform_values do |value|
-    if value.present?
-      value
-    else
-      nil
-    end
-  end
+  hash = csv.to_h.transform_values(&:strip).transform_values { |value| value if value.present? }
 
   ethnic_church = hash.slice(:name, :phone, :website, :pastors_name)
   language_hsh = hash.slice(:language)
