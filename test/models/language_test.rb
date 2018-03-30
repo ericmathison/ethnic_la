@@ -10,6 +10,16 @@ class LanguageTest < ActiveSupport::TestCase
     assert_equal Language.list.length, Language.count
   end
 
+  test 'name value matches name of corresponding Language record' do
+    l = Language.first
+    expected_name = l.name
+    actual_name = Language.list
+                    .select { |languages| languages[:id] == l.id }
+                    .first[:name]
+
+    assert_equal expected_name, actual_name
+  end
+
   test 'name attribute should be unique' do
     # using an existing fixture name
     lang = Language.new(name: languages(:chinese).name)
