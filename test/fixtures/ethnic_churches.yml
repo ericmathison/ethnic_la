@@ -1,7 +1,6 @@
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
 foobar:
-  id: 1
   name: Foobar Church
   website: 'http://example.com'
   phone: '1234567890'
@@ -12,7 +11,6 @@ foobar:
   religious_background_id: 1
 
 bazquux:
-  id: 2
   name: Bazquux Church
   website: 'http://example2.com'
   phone: '0987654321'

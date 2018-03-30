@@ -3,11 +3,11 @@ los_angeles:
   city: Los Angeles
   state: CA
   zip: 90013
-  ethnic_church_id: 1
+  ethnic_church: foobar
 
 santa_monica:
   street: '4567 Bar St.'
   city: Santa Monica
   state: CA
   zip: 90401
-  ethnic_church_id: 2
+  ethnic_church: bazquux
