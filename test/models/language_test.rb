@@ -1,15 +1,13 @@
 require 'test_helper'
 
 class LanguageTest < ActiveSupport::TestCase
-  test "Language.list" do
-    cn = languages(:chinese)
-    en = languages(:english)
-    ar = languages(:arabic)
-    array_of_hashes = [{id: ar.id, name: ar.name},
-                       {id: cn.id, name: cn.name},
-                       {id: en.id, name: en.name}]
+  test 'every language in Language.list has an id and a name' do
+    assert Language.list.first.has_key?(:id)
+    assert Language.list.first.has_key?(:name)
+  end
 
-    assert_equal Language.list, array_of_hashes
+  test 'Language.list has every stored language' do
+    assert_equal Language.list.length, Language.count
   end
 
   test 'name attribute should be unique' do
