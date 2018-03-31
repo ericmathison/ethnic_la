@@ -13,7 +13,9 @@ class CreateTest < ApplicationSystemTestCase
     #use existing language to ensure application can handle re-using
     #language names
     language = languages(:chinese).name
-    language2 = languages(:english).name
+
+    #use a language that does not exist in the database
+    language2 = 'foolang'
 
     #use an existing country name
     country = countries(:china).name
@@ -33,8 +35,12 @@ class CreateTest < ApplicationSystemTestCase
     fill_in 'ethnic_church_pastors_name', with: pastors_name
     fill_in 'ethnic_church_email', with: email
 
-    select language, from: 'language_name'
-    select language2, from: 'language_name'
+    find('.chosen-search-input').click
+    within('.chosen-drop') do
+      find('li', text: language).click
+    end
+    find('.chosen-search-input').click.send_keys(language2)
+    click_link 'add_new_language'
     fill_in 'country_name', with: country
     fill_in 'religious_background_persuasion', with: religious_background
 
@@ -48,21 +54,18 @@ class CreateTest < ApplicationSystemTestCase
 
     click_button 'create'
 
-    ec = EthnicChurch.where(name: church_name).first
-
-    assert_equal ec.name, church_name
-    assert_equal ec.phone, phone
-    assert_equal ec.website, website
-    assert_equal ec.pastors_name, pastors_name
-    assert_equal ec.email, email
-    assert_includes ec.languages.map(&:name), language
-    assert_includes ec.languages.map(&:name), language2
-    assert_equal ec.country.name, country
-    assert_equal ec.religious_background.persuasion, religious_background
-    assert_equal ec.address.street, street
-    assert_equal ec.address.city, city
-    assert_equal ec.address.zip, zip
-
-    assert_equal find('#notice').text, 'Successfully added new Ethnic Church'
+    assert_selector '#church_name', { text: church_name }
+    assert_selector '#phone', { text: phone }
+    assert_selector '#website', { text: website }
+    assert_selector '#pastors_name', { text: pastors_name }
+    assert_selector '#email', { text: email }
+    assert_selector '#address', { text: street }
+    assert_selector '#address', { text: city }
+    assert_selector '#address', { text: zip }
+    assert_selector '#language', { text: language }
+    assert_selector '#language', { text: language2 }
+    assert_selector '#country', { text: country }
+    assert_selector '#religious_background', { text: religious_background }
+    assert_selector '#notice', { text: 'Successfully added new Ethnic Church' }
   end
 end
