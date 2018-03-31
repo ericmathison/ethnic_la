@@ -66,6 +66,7 @@ class CreateTest < ApplicationSystemTestCase
     assert_selector '#language', { text: language2 }
     assert_selector '#country', { text: country }
     assert_selector '#religious_background', { text: religious_background }
+    assert_selector '#note', { text: note }
     assert_selector '#notice', { text: 'Successfully added new Ethnic Church' }
   end
 end

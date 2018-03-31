@@ -20,6 +20,7 @@ class EthnicChurchesController < ApplicationController
     ec.country = Country.find_or_initialize_by(name: country_params[:name])
     ec.religious_background = ReligiousBackground.find_or_initialize_by(persuasion: religious_background_params[:persuasion])
     ec.build_address(address_params)
+    ec.build_note(note_params)
 
     if ec.save
       redirect_to ethnic_church_path(ec), notice: 'Successfully added new Ethnic Church'
@@ -44,6 +45,10 @@ class EthnicChurchesController < ApplicationController
 
   def religious_background_params
     params.require(:religious_background).permit(:persuasion)
+  end
+
+  def note_params
+    params.require(:note).permit(:content)
   end
 
   def address_params
