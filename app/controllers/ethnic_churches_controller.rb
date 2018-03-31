@@ -14,16 +14,16 @@ class EthnicChurchesController < ApplicationController
   end
 
   def create
-    ec = EthnicChurch.new(ethnic_church_params)
+    @ethnic_church = EthnicChurch.new(ethnic_church_params)
     languages = params[:language][:name]
-    ec.languages = languages
-    ec.country = Country.find_or_initialize_by(name: country_params[:name])
-    ec.religious_background = ReligiousBackground.find_or_initialize_by(persuasion: religious_background_params[:persuasion])
-    ec.build_address(address_params)
-    ec.build_note(note_params)
+    @ethnic_church.languages = languages
+    @ethnic_church.country = Country.find_or_initialize_by(name: country_params[:name])
+    @ethnic_church.religious_background = ReligiousBackground.find_or_initialize_by(persuasion: religious_background_params[:persuasion])
+    @ethnic_church.build_address(address_params)
+    @ethnic_church.build_note(note_params)
 
-    if ec.save
-      redirect_to ethnic_church_path(ec), notice: 'Successfully added new Ethnic Church'
+    if @ethnic_church.save
+      redirect_to ethnic_church_path(@ethnic_church), notice: 'Successfully added new Ethnic Church'
     else
       render 'new', flash[:error] = 'Error adding new ethnic church'
     end
