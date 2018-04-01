@@ -3,6 +3,8 @@ require 'csv'
 headers = %i[street city country website language name notes pastors_name phone religious_background state zip]
 
 CSV.foreach(ARGV[0], headers: headers) do |csv|
+  printf "\rProcessing line: %s", $INPUT_LINE_NUMBER
+
   hash = csv.to_h.transform_values(&:strip).transform_values { |value| value if value.present? }
 
   ethnic_church = hash.slice(:name, :phone, :website, :pastors_name)
@@ -31,3 +33,4 @@ CSV.foreach(ARGV[0], headers: headers) do |csv|
     ethnic_church.save!
   end
 end
+puts
