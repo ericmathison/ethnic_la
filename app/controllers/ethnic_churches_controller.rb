@@ -10,7 +10,6 @@ class EthnicChurchesController < ApplicationController
 
   def new
     @ethnic_church = EthnicChurch.new
-    @language_array = Language.pluck(:name).reject(&:nil?).sort.map { |lang| [lang, lang] }
   end
 
   def create

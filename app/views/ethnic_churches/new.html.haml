@@ -14,7 +14,7 @@
         = f.text_field :email
         = fields_for :language do |lang|
           = lang.label :language
-          = lang.select :name, options_for_select(@language_array), {}, multiple: true
+          = lang.collection_select :name, Language.order(:name), :name, :name, {}, multiple: true
         = fields_for :country do |country|
           = country.label :country
           = country.text_field :name
