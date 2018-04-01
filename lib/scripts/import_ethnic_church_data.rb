@@ -8,7 +8,7 @@ CSV.foreach(ARGV[0], headers: headers) do |csv|
   hash = csv.to_h.transform_values(&:strip).transform_values { |value| value if value.present? }
 
   ethnic_church = hash.slice(:name, :phone, :website, :pastors_name)
-  language_hsh = hash.slice(:language)
+  language_name = hash[:language]
   country = hash.slice(:country)
   religious_background = hash.slice(:religious_background)
   notes = hash.slice(:notes)
@@ -20,12 +20,7 @@ CSV.foreach(ARGV[0], headers: headers) do |csv|
 
     ethnic_church = EthnicChurch.new(ethnic_church)
 
-    language = Language.find_by(name: language_hsh[:language])
-    if language
-      ethnic_church.languages = [language]
-    else
-      ethnic_church.languages.build(name: language_hsh[:language])
-    end
+    ethnic_church.languages = [language_name]
     ethnic_church.country = country
     ethnic_church.religious_background = religious_background
     ethnic_church.build_note(content: notes[:notes])
