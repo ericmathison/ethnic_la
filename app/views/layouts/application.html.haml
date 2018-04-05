@@ -24,7 +24,7 @@
         - if notice
           %p#notice.alert.alert-info
             = notice
-        - if alert
-          %p#alert.alert.alert-warning
-            = alert
+        - if flash[:error]
+          %p#error.alert.alert-warning
+            = flash[:error]
     = yield

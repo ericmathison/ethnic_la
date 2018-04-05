@@ -24,7 +24,8 @@ class EthnicChurchesController < ApplicationController
     if @ethnic_church.save
       redirect_to ethnic_church_path(@ethnic_church), notice: 'Successfully added new Ethnic Church'
     else
-      render 'new', flash[:error] = 'Error adding new ethnic church'
+      flash.now[:error] = 'Error adding ethnic church'
+      render 'new'
     end
   end
 

@@ -7,6 +7,7 @@ class CreateTest < ApplicationSystemTestCase
     @website = 'https://example.com/'
     @pastors_name = 'John Doe'
     @email = 'foo@example.com'
+    @invalid_email = 'foo'
     @existing_language = languages(:chinese).name
     @new_language = 'foolang'
     @country = countries(:china).name
@@ -60,5 +61,12 @@ class CreateTest < ApplicationSystemTestCase
     assert_selector '#religious_background', text: @religious_background
     assert_selector '#note', text: @note
     assert_selector '#notice', text: 'Successfully added new Ethnic Church'
+  end
+
+  test 'displays error for invalid input' do
+    visit new_ethnic_church_path
+    fill_in 'ethnic_church_email', with: @invalid_email
+    click_button 'create'
+    assert_selector '#error', text: 'Error adding ethnic church'
   end
 end
