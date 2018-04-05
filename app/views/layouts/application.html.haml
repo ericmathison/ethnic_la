@@ -22,9 +22,9 @@
     .row.justify-content-center
       .col-9
         - if notice
-          %p#notice.alert.alert-info
+          %p#notice.alert.alert-success
             = notice
-        - if flash[:error]
-          %p#error.alert.alert-warning
-            = flash[:error]
+        - if alert
+          %p#alert.alert.alert-danger
+            = alert
     = yield

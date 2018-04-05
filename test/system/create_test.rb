@@ -67,6 +67,6 @@ class CreateTest < ApplicationSystemTestCase
     visit new_ethnic_church_path
     fill_in 'ethnic_church_email', with: @invalid_email
     click_button 'create'
-    assert_selector '#error', text: 'Error adding ethnic church'
+    assert_selector '#alert', text: 'Email is invalid'
   end
 end
