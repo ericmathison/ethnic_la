@@ -46,19 +46,19 @@ class CreateTest < ApplicationSystemTestCase
 
     click_button 'create'
 
-    assert_selector '#church_name', { text: @church_name }
-    assert_selector '#phone', { text: @phone }
-    assert_selector '#website', { text: @website }
-    assert_selector '#pastors_name', { text: @pastors_name }
-    assert_selector '#email', { text: @email }
-    assert_selector '#address', { text: @street }
-    assert_selector '#address', { text: @city }
-    assert_selector '#address', { text: @zip }
-    assert_selector '#language', { text: @existing_language }
-    assert_selector '#language', { text: @new_language }
-    assert_selector '#country', { text: @country }
-    assert_selector '#religious_background', { text: @religious_background }
-    assert_selector '#note', { text: @note }
-    assert_selector '#notice', { text: 'Successfully added new Ethnic Church' }
+    assert_selector '#church_name', text: @church_name
+    assert_selector '#phone', text: @phone
+    assert_selector '#website', text: @website
+    assert_selector '#pastors_name', text: @pastors_name
+    assert_selector '#email', text: @email
+    assert_selector '#address', text: @street
+    assert_selector '#address', text: @city
+    assert_selector '#address', text: @zip
+    assert_selector '#language', text: @existing_language
+    assert_selector '#language', text: @new_language
+    assert_selector '#country', text: @country
+    assert_selector '#religious_background', text: @religious_background
+    assert_selector '#note', text: @note
+    assert_selector '#notice', text: 'Successfully added new Ethnic Church'
   end
 end
