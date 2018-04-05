@@ -5,6 +5,8 @@ class EthnicChurch < ApplicationRecord
   belongs_to :country
   belongs_to :religious_background
 
+  validates :email, format: { with: Devise.email_regexp }
+
   def languages=(names)
     language_records = names.map do |language|
       next if language.blank?
