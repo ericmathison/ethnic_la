@@ -28,6 +28,7 @@
                 %td.language-name= church.languages.map(&:name).join(', ')
                 %td= church.address.city
                 %td= church.website
+        = paginate @ethnic_churches
 %footer
   - if admin_signed_in?
     = link_to('Logout', destroy_admin_session_path, method: :delete)

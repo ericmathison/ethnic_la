@@ -1,13 +1,19 @@
 los_angeles:
-  street: '1234 Foo St.'
+  street: 1234 Foo St.
   city: Los Angeles
-  state: CA
-  zip: 90013
+  zip: '90013'
   ethnic_church: foobar
 
 santa_monica:
-  street: '4567 Bar St.'
+  street: 4567 Bar St.
   city: Santa Monica
-  state: CA
-  zip: 90401
+  zip: '90401'
   ethnic_church: bazquux
+
+<% 1.upto(27) do |n| %>
+address_<%= n %>:
+  street: <%= n %> Baz St.
+  city: City <%= n %>
+  zip: '<%= n %>'
+  ethnic_church: church_<%= n %>
+<% end %>

@@ -4,7 +4,7 @@ foobar:
   name: Foobar Church
   website: 'http://example.com'
   phone: '1234567890'
-  email: foo@bar.com
+  email: 'foo@bar.com'
   pastors_name: Joe
   languages: english, arabic
   country_id: 1
@@ -14,8 +14,20 @@ bazquux:
   name: Bazquux Church
   website: 'http://example2.com'
   phone: '0987654321'
-  email: bar@foo.com
+  email: 'bar@foo.com'
   pastors_name: Bob
   languages: chinese
   country_id: 2
   religious_background_id: 2
+
+<% 1.upto(27) do |n| %>
+church_<%= n %>:
+  name: name <%= n %>
+  website: 'http://example<%= n %>.com'
+  phone:  '123456789<%= n %>'
+  email:  'foo<%= n %>@bar.com'
+  pastors_name: <%= n.ordinalize %> Chris
+  languages: chinese
+  country_id: 2
+  religious_background_id: 2
+<% end %>

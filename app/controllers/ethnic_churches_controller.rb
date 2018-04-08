@@ -1,6 +1,6 @@
 class EthnicChurchesController < ApplicationController
   def index
-    @ethnic_churches = EthnicChurch.all
+    @ethnic_churches = EthnicChurch.page(params[:page])
     @languages = Language.list
   end
 
