@@ -1,7 +1,5 @@
 united_states:
-  id: 1
-  name: 'United States'
+  name: United States
 
 china:
-  id: 2
   name: China

@@ -7,8 +7,8 @@ foobar:
   email: 'foo@bar.com'
   pastors_name: Joe
   languages: english, arabic
-  country_id: 1
-  religious_background_id: 1
+  country: united_states
+  religious_background: catholic
 
 bazquux:
   name: Bazquux Church
@@ -17,8 +17,8 @@ bazquux:
   email: 'bar@foo.com'
   pastors_name: Bob
   languages: chinese
-  country_id: 2
-  religious_background_id: 2
+  country: china
+  religious_background: protestant
 
 <% 1.upto(27) do |n| %>
 church_<%= n %>:
@@ -28,6 +28,6 @@ church_<%= n %>:
   email:  'foo<%= n %>@bar.com'
   pastors_name: <%= n.ordinalize %> Chris
   languages: chinese
-  country_id: 2
-  religious_background_id: 2
+  country: china
+  religious_background: protestant
 <% end %>

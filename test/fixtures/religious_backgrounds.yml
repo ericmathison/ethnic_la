@@ -1,7 +1,5 @@
 catholic:
-  id: 1
   persuasion: Catholic
 
 protestant:
-  id: 2
   persuasion: Protestant
