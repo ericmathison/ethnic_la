@@ -3,7 +3,7 @@ require 'test_helper'
 class EthnicChurchesControllerTest < ActionDispatch::IntegrationTest
   fixtures :ethnic_churches
 
-  test "#index shows records" do
+  test '#index shows records' do
     get '/'
 
     assert_equal 200, status

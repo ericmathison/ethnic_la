@@ -1,7 +1,7 @@
 require 'test_helper'
 
 class AddressTest < ActiveSupport::TestCase
-  test "Address#full_address" do
+  test 'Address#full_address' do
     addr = addresses(:los_angeles)
     expected_address =  "#{addr.street}\n#{addr.city}, #{addr.state} #{addr.zip}"
 
