@@ -69,4 +69,12 @@ class CreateTest < ApplicationSystemTestCase
     click_button 'create'
     assert_selector '#alert', text: 'Email is invalid'
   end
+
+  test 'no error for empty email' do
+    empty_string = ''
+    visit new_ethnic_church_path
+    fill_in 'ethnic_church_email', with: empty_string
+    click_button 'create'
+    assert_selector '#notice', text: 'Successfully added new Ethnic Church'
+  end
 end

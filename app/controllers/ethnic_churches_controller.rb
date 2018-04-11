@@ -32,7 +32,9 @@ class EthnicChurchesController < ApplicationController
   private
 
   def ethnic_church_params
-    params.require(:ethnic_church).permit(:name, :phone, :website, :pastors_name, :email)
+    params.require(:ethnic_church)
+      .permit(:name, :phone, :website, :pastors_name, :email)
+      .transform_values { |val| val if val.present? }
   end
 
   def language_params
