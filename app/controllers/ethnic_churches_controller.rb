@@ -13,13 +13,14 @@ class EthnicChurchesController < ApplicationController
   end
 
   def create
-    @ethnic_church = EthnicChurch.new(ethnic_church_params)
-    languages = params[:language][:name]
-    @ethnic_church.languages = languages
-    @ethnic_church.country = Country.find_or_initialize_by(name: country_params[:name])
-    @ethnic_church.religious_background = ReligiousBackground.find_or_initialize_by(persuasion: religious_background_params[:persuasion])
-    @ethnic_church.build_address(address_params)
-    @ethnic_church.build_note(note_params)
+    @ethnic_church = EthnicChurchBuilder.instantiate(
+      ethnic_church: ethnic_church,
+      languages: languages,
+      country: country,
+      religious_background: religious_background,
+      address: address,
+      note: note
+    )
 
     if @ethnic_church.save
       redirect_to ethnic_church_path(@ethnic_church), notice: 'Successfully added new Ethnic Church'
@@ -31,26 +32,42 @@ class EthnicChurchesController < ApplicationController
 
   private
 
-  def ethnic_church_params
-    params.require(:ethnic_church)
-      .permit(:name, :phone, :website, :pastors_name, :email)
-      .transform_values { |val| val if val.present? }
+  def ethnic_church
+    EthnicChurch.new(ethnic_church_params)
   end
 
-  def language_params
-    params.require(:language).permit(:name)
+  def languages
+    params[:language][:name].reject(&:blank?).map do |lang_name|
+      Language.find_or_initialize_by(name: lang_name)
+    end
   end
 
-  def country_params
-    params.require(:country).permit(:name)
+  def country
+    country = params[:country][:name]
+    Country.find_or_initialize_by(name: country)
   end
 
-  def religious_background_params
-    params.require(:religious_background).permit(:persuasion)
+  def address
+    Address.new(address_params)
+  end
+
+  def note
+    Note.new(note_params)
   end
 
   def note_params
     params.require(:note).permit(:content)
+  end
+
+  def religious_background
+    persuasion = params[:religious_background][:persuasion]
+    ReligiousBackground.find_or_initialize_by(persuasion: persuasion)
+  end
+
+  def ethnic_church_params
+    params.require(:ethnic_church)
+      .permit(:name, :phone, :website, :pastors_name, :email)
+      .transform_values { |val| val if val.present? }
   end
 
   def address_params
