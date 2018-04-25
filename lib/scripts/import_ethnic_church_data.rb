@@ -24,18 +24,19 @@ CSV.foreach(ARGV[0], headers: headers) do |csv|
   address[:city] = city
   address[:zip] = zip
 
+  languages = language_names.map do |lang_name|
+    Language.find_or_initialize_by(name: lang_name)
+  end
+
   EthnicChurch.transaction do
-    country = Country.find_or_initialize_by(name: country[:country])
-    religious_background = ReligiousBackground.find_or_initialize_by(persuasion: religious_background[:religious_background])
-
-    ethnic_church = EthnicChurch.new(ethnic_church)
-
-    ethnic_church.languages = language_names
-    ethnic_church.country = country
-    ethnic_church.religious_background = religious_background
-    ethnic_church.build_note(content: notes[:notes])
-    ethnic_church.build_address(address)
-    ethnic_church.save!
+    EthnicChurchBuilder.instantiate(
+      ethnic_church: EthnicChurch.new(ethnic_church),
+      languages: languages,
+      country: Country.find_or_initialize_by(name: country[:country]),
+      religious_background: ReligiousBackground.find_or_initialize_by(persuasion: religious_background[:religious_background]),
+      note: Note.new(content: notes[:notes]),
+      address: Address.new(address)
+    ).save!
   end
 end
 puts
