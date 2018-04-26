@@ -16,7 +16,7 @@
           = lang.label :language
           = lang.collection_select :name, Language.order(:name), :name, :name, {}, multiple: true
         = f.fields_for :country do |country|
-          = country.label :country
+          = country.label :name, 'Country'
           = country.text_field :name
         = fields_for :religious_background do |religious_background|
           = religious_background.label :religious_background
