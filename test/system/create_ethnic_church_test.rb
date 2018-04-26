@@ -38,9 +38,9 @@ class CreateTest < ApplicationSystemTestCase
     fill_in 'ethnic_church_religious_background_persuasion', with: @religious_background
 
     #address
-    fill_in 'address_street', with: @street
-    fill_in 'address_city', with: @city
-    fill_in 'address_zip', with: @zip
+    fill_in 'ethnic_church_address_street', with: @street
+    fill_in 'ethnic_church_address_city', with: @city
+    fill_in 'ethnic_church_address_zip', with: @zip
 
     #note
     fill_in 'note_content', with: @note

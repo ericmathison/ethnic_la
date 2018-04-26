@@ -71,6 +71,6 @@ class EthnicChurchesController < ApplicationController
   end
 
   def address_params
-    params.require(:address).permit(:street, :city, :zip)
+    params.require(:ethnic_church).require(:address).permit(:street, :city, :zip)
   end
 end
