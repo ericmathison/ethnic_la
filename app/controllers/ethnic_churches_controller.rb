@@ -37,7 +37,7 @@ class EthnicChurchesController < ApplicationController
   end
 
   def languages
-    params[:language][:name].reject(&:blank?).map do |lang_name|
+    params[:ethnic_church][:language][:name].reject(&:blank?).map do |lang_name|
       Language.find_or_initialize_by(name: lang_name)
     end
   end

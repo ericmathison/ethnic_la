@@ -12,7 +12,7 @@
         = f.text_field :pastors_name
         = f.label :email
         = f.text_field :email
-        = fields_for :language do |lang|
+        = f.fields_for :language do |lang|
           = lang.label :language
           = lang.collection_select :name, Language.order(:name), :name, :name, {}, multiple: true
         = fields_for :country do |country|
