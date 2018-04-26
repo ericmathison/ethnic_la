@@ -34,7 +34,7 @@ class CreateTest < ApplicationSystemTestCase
     end
     find('.chosen-search-input').click.send_keys(@new_language)
     click_link 'add_new_language'
-    fill_in 'country_name', with: @country
+    fill_in 'ethnic_church_country_name', with: @country
     fill_in 'religious_background_persuasion', with: @religious_background
 
     #address

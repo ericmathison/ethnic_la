@@ -43,7 +43,7 @@ class EthnicChurchesController < ApplicationController
   end
 
   def country
-    country = params[:country][:name]
+    country = params[:ethnic_church][:country][:name]
     Country.find_or_initialize_by(name: country)
   end
 
