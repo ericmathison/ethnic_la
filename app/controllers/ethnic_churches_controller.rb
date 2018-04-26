@@ -56,7 +56,7 @@ class EthnicChurchesController < ApplicationController
   end
 
   def note_params
-    params.require(:note).permit(:content)
+    params.require(:ethnic_church).require(:note).permit(:content)
   end
 
   def religious_background

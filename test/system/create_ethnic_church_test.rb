@@ -43,7 +43,7 @@ class CreateTest < ApplicationSystemTestCase
     fill_in 'ethnic_church_address_zip', with: @zip
 
     #note
-    fill_in 'note_content', with: @note
+    fill_in 'ethnic_church_note_content', with: @note
 
     click_button 'create'
 
