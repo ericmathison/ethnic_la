@@ -18,7 +18,7 @@
         = f.fields_for :country do |country|
           = country.label :name, 'Country'
           = country.text_field :name
-        = fields_for :religious_background do |religious_background|
+        = f.fields_for :religious_background do |religious_background|
           = religious_background.label :religious_background
           = religious_background.text_field :persuasion
         = fields_for :address do |address|

@@ -60,7 +60,7 @@ class EthnicChurchesController < ApplicationController
   end
 
   def religious_background
-    persuasion = params[:religious_background][:persuasion]
+    persuasion = params[:ethnic_church][:religious_background][:persuasion]
     ReligiousBackground.find_or_initialize_by(persuasion: persuasion)
   end
 
