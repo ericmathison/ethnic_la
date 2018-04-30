@@ -1,6 +1,6 @@
 require 'application_system_test_case'
 
-class CreateTest < ApplicationSystemTestCase
+class CreateEthnicChurchTest < ApplicationSystemTestCase
   setup do
     @church_name = 'Chinese Church of Footown'
     @phone = '1234567890'
