@@ -30,10 +30,34 @@ class EthnicChurchesController < ApplicationController
     end
   end
 
+  def edit
+    @ethnic_church = EthnicChurch.find(params[:id])
+  end
+
+  def update
+    @ethnic_church = EthnicChurchBuilder.instantiate(
+      ethnic_church: ethnic_church,
+      languages: languages,
+      country: country,
+      religious_background: religious_background,
+      address: address,
+      note: note
+    )
+
+    if @ethnic_church.save
+      redirect_to ethnic_church_path(@ethnic_church), notice: 'Successfully updated Ethnic Church'
+    else
+      flash.now.alert = @ethnic_church.errors.full_messages.join(', ')
+      render 'new'
+    end
+  end
+
   private
 
   def ethnic_church
-    EthnicChurch.new(ethnic_church_params)
+    ec = EthnicChurch.find_by(id: params[:id]) || EthnicChurch.new
+    ec.update(ethnic_church_params)
+    ec
   end
 
   def languages
@@ -48,11 +72,15 @@ class EthnicChurchesController < ApplicationController
   end
 
   def address
-    Address.new(address_params)
+    addr = ethnic_church.address || ethnic_church.build_address(address_params)
+    addr.update(address_params)
+    addr
   end
 
   def note
-    Note.new(note_params)
+    n = ethnic_church.note || ethnic_church.build_note(note_params)
+    n.update(note_params)
+    n
   end
 
   def note_params

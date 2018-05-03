@@ -1,4 +1,4 @@
-$(->
+document.addEventListener 'turbolinks:load', ->
   language_adder = ->
     select_id = '#ethnic_church_language_name'
     $(select_id).chosen({no_results_text: 'Language not found. <a id="add_new_language" href="#">Add</a>', placeholder_text_multiple: ' '})
@@ -16,4 +16,3 @@ $(->
       )
     )
   language_adder()
-)

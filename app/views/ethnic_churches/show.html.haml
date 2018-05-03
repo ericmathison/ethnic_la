@@ -27,3 +27,5 @@
 
     %h3.title-with-emphasis Notes:
     %p#note= @ethnic_church.note.try(:content) || '-'
+
+    %p= link_to 'Edit', edit_ethnic_church_path(@ethnic_church)
