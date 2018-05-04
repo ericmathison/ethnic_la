@@ -56,7 +56,7 @@ class EthnicChurchesController < ApplicationController
 
   def ethnic_church
     ec = EthnicChurch.find_by(id: params[:id]) || EthnicChurch.new
-    ec.update(ethnic_church_params)
+    ec.assign_attributes(ethnic_church_params)
     ec
   end
 
@@ -73,13 +73,13 @@ class EthnicChurchesController < ApplicationController
 
   def address
     addr = ethnic_church.address || ethnic_church.build_address(address_params)
-    addr.update(address_params)
+    addr.assign_attributes(address_params)
     addr
   end
 
   def note
     n = ethnic_church.note || ethnic_church.build_note(note_params)
-    n.update(note_params)
+    n.assign_attributes(note_params)
     n
   end
 

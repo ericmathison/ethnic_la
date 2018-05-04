@@ -70,6 +70,34 @@ class CreateEthnicChurchTest < ApplicationSystemTestCase
     assert_selector '#alert', text: 'Email is invalid'
   end
 
+  test 'records are not saved on invalid input' do
+    Capybara.current_driver = :rack_test
+
+    ec_count_before = EthnicChurch.count
+    language_count_before = Language.count
+    country_count_before = Country.count
+    religious_background_count_before = ReligiousBackground.count
+    address_count_before = Address.count
+
+    visit new_ethnic_church_path
+    fill_in 'ethnic_church_country_name', with: 'Egypt'
+    fill_in 'ethnic_church_religious_background_persuasion', with: 'Coptic'
+    fill_in 'ethnic_church_email', with: @invalid_email
+    click_button 'create'
+
+    ec_count_after = EthnicChurch.count
+    language_count_after = Language.count
+    country_count_after = Country.count
+    religious_background_count_after = ReligiousBackground.count
+    address_count_after = Address.count
+
+    assert_equal ec_count_before, ec_count_after, 'ethnic church count is off'
+    assert_equal language_count_before, language_count_after, 'language count is off'
+    assert_equal country_count_before, country_count_after, 'country count is off'
+    assert_equal religious_background_count_before, religious_background_count_after, 'religious background count is off'
+    assert_equal address_count_before, address_count_after, 'address count is off'
+  end
+
   test 'no error for empty email' do
     empty_string = ''
     visit new_ethnic_church_path
