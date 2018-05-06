@@ -16,9 +16,11 @@ class CreateEthnicChurchTest < ApplicationSystemTestCase
     @city = 'Footown'
     @zip = '99999'
     @note = 'This is a note.'
+    @admin = admins(:alice)
   end
 
   test 'successfully creates an ethnic church and associated objects' do
+    login_as @admin
     visit new_ethnic_church_path
 
     #ethnic church
@@ -64,6 +66,7 @@ class CreateEthnicChurchTest < ApplicationSystemTestCase
   end
 
   test 'displays error for invalid input' do
+    login_as @admin
     visit new_ethnic_church_path
     fill_in 'ethnic_church_email', with: @invalid_email
     click_button 'create'
@@ -72,6 +75,7 @@ class CreateEthnicChurchTest < ApplicationSystemTestCase
 
   test 'records are not saved on invalid input' do
     Capybara.current_driver = :rack_test
+    login_as @admin
 
     ec_count_before = EthnicChurch.count
     language_count_before = Language.count
@@ -99,6 +103,7 @@ class CreateEthnicChurchTest < ApplicationSystemTestCase
   end
 
   test 'no error for empty email' do
+    login_as @admin
     empty_string = ''
     visit new_ethnic_church_path
     fill_in 'ethnic_church_email', with: empty_string

@@ -1,4 +1,6 @@
 class EthnicChurchesController < ApplicationController
+  before_action :authenticate_admin!, only: %i[new create edit update]
+
   def index
     @ethnic_churches = EthnicChurch.page(params[:page])
     @languages = Language.list

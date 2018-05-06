@@ -18,9 +18,11 @@ class EditEthnicChurchTest < ApplicationSystemTestCase
     @city = 'Footown'
     @zip = '99999'
     @note = 'This is a note.'
+    @admin = admins(:alice)
   end
 
   test 'can edit an ethnic church and associated objects' do
+    login_as @admin
     visit ethnic_church_path(@ethnic_church)
 
     click_link 'Edit'
@@ -68,6 +70,7 @@ class EditEthnicChurchTest < ApplicationSystemTestCase
   end
 
   test 'edit page correctly retrieves existing values' do
+    login_as @admin
     visit edit_ethnic_church_path(@ethnic_church)
 
     church_name = find('#ethnic_church_name').value
@@ -100,6 +103,7 @@ class EditEthnicChurchTest < ApplicationSystemTestCase
   end
 
   test 'editing an ethnic church does not create a new record' do
+    login_as @admin
     Capybara.current_driver = :rack_test
     count_before = EthnicChurch.where(name: @ethnic_church.name).count
     visit edit_ethnic_church_path(@ethnic_church)
@@ -109,6 +113,7 @@ class EditEthnicChurchTest < ApplicationSystemTestCase
   end
 
   test 'edit page displays error for invalid input' do
+    login_as @admin
     visit edit_ethnic_church_path(@ethnic_church)
     fill_in 'ethnic_church_email', with: @invalid_email
     click_button 'create'
@@ -116,6 +121,7 @@ class EditEthnicChurchTest < ApplicationSystemTestCase
   end
 
   test 'no error for empty email on edit page' do
+    login_as @admin
     empty_string = ''
     visit edit_ethnic_church_path(@ethnic_church)
     fill_in 'ethnic_church_email', with: empty_string
