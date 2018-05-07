@@ -1,8 +1,6 @@
 require 'test_helper'
 
 class EthnicChurchesControllerTest < ActionDispatch::IntegrationTest
-  fixtures :ethnic_churches
-
   test '#index shows records' do
     get '/'
 
