@@ -95,13 +95,16 @@ h3 {
 }
 
 .language_list {
+  display: -webkit-flex;
   display: flex;
+  -webkit-flex-wrap: wrap;
   flex-wrap: wrap;
   justify-content: center;
 }
 
 .language {
-  width: 200px;
+  -webkit-flex-basis: 200px;
+  flex-basis: 200px;
   height: 200px;
   background: #ddd;
   box-shadow: 0 10px 6px -6px #49473f;
