@@ -30,5 +30,5 @@
           = address.text_field :zip
         = f.fields_for :note, @ethnic_church.note do |note|
           = note.label :note
-          = note.text_field :content
+          = note.text_area :content
         = f.submit 'Create', class: 'btn btn-primary', id: 'create'
