@@ -51,7 +51,7 @@ class EditEthnicChurchTest < ApplicationSystemTestCase
     #note
     fill_in 'ethnic_church_note_content', with: @note
 
-    click_button 'create'
+    click_button 'Update'
 
     assert_selector '#church_name', text: @church_name
     assert_selector '#phone', text: @phone
@@ -107,7 +107,7 @@ class EditEthnicChurchTest < ApplicationSystemTestCase
     Capybara.current_driver = :rack_test
     count_before = EthnicChurch.where(name: @ethnic_church.name).count
     visit edit_ethnic_church_path(@ethnic_church)
-    click_button 'create'
+    click_button 'Update'
     count_after = EthnicChurch.where(name: @ethnic_church.name).count
     assert_equal count_before, count_after
   end
@@ -116,7 +116,7 @@ class EditEthnicChurchTest < ApplicationSystemTestCase
     login_as @admin
     visit edit_ethnic_church_path(@ethnic_church)
     fill_in 'ethnic_church_email', with: @invalid_email
-    click_button 'create'
+    click_button 'Update'
     assert_selector '#alert', text: 'Email is invalid'
   end
 
@@ -125,7 +125,7 @@ class EditEthnicChurchTest < ApplicationSystemTestCase
     empty_string = ''
     visit edit_ethnic_church_path(@ethnic_church)
     fill_in 'ethnic_church_email', with: empty_string
-    click_button 'create'
+    click_button 'Update'
     assert_selector '#notice', text: 'Successfully updated Ethnic Church'
   end
 end

@@ -31,4 +31,4 @@
         = f.fields_for :note, @ethnic_church.note do |note|
           = note.label :note
           = note.text_area :content
-        = f.submit 'Create', class: 'btn btn-primary', id: 'create'
+        = f.submit (@ethnic_church.new_record? ? 'Create' : 'Update'), class: 'btn btn-primary', id: 'create'
