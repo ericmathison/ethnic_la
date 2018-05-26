@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_05_26_005155) do
+ActiveRecord::Schema.define(version: 2018_05_26_024316) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -21,8 +21,8 @@ ActiveRecord::Schema.define(version: 2018_05_26_005155) do
     t.string "state"
     t.string "zip"
     t.bigint "ethnic_church_id"
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
     t.index ["ethnic_church_id"], name: "index_addresses_on_ethnic_church_id"
   end
 
@@ -45,8 +45,8 @@ ActiveRecord::Schema.define(version: 2018_05_26_005155) do
 
   create_table "countries", force: :cascade do |t|
     t.string "name"
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
     t.index ["name"], name: "index_countries_on_name", unique: true
   end
 
@@ -67,29 +67,29 @@ ActiveRecord::Schema.define(version: 2018_05_26_005155) do
   create_table "ethnic_churches_languages", id: false, force: :cascade do |t|
     t.bigint "ethnic_church_id", null: false
     t.bigint "language_id", null: false
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "languages", force: :cascade do |t|
     t.string "name"
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
     t.index ["name"], name: "index_languages_on_name", unique: true
   end
 
   create_table "notes", force: :cascade do |t|
     t.string "content"
     t.bigint "ethnic_church_id"
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
     t.index ["ethnic_church_id"], name: "index_notes_on_ethnic_church_id"
   end
 
   create_table "religious_backgrounds", force: :cascade do |t|
     t.string "persuasion"
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
     t.index ["persuasion"], name: "index_religious_backgrounds_on_persuasion", unique: true
   end
 
