@@ -1,5 +1,6 @@
 class Language < ApplicationRecord
-  has_and_belongs_to_many :ethnic_churches
+  has_many :services
+  has_many :ethnic_churches, through: :services
 
   validates :name, uniqueness: true
 

@@ -1,0 +1,17 @@
+foobar_english:
+  language: english
+  ethnic_church: foobar
+
+foobar_arabic:
+  language: arabic
+  ethnic_church: foobar
+
+bazquux_chinese:
+  language: chinese
+  ethnic_church: bazquux
+
+<% 1.upto(27) do |n| %>
+service_<%= n %>:
+  language: chinese
+  ethnic_church: church_<%= n %>
+<% end %>

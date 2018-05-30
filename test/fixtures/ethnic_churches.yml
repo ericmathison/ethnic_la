@@ -6,7 +6,6 @@ foobar:
   phone: '1234567890'
   email: 'foo@bar.com'
   pastors_name: Joe
-  languages: english, arabic
   country: united_states
   religious_background: catholic
 
@@ -16,7 +15,6 @@ bazquux:
   phone: '0987654321'
   email: 'bar@foo.com'
   pastors_name: Bob
-  languages: chinese
   country: china
   religious_background: protestant
 
@@ -27,7 +25,6 @@ church_<%= n %>:
   phone:  '123456789<%= n %>'
   email:  'foo<%= n %>@bar.com'
   pastors_name: <%= n.ordinalize %> Chris
-  languages: chinese
   country: china
   religious_background: protestant
 <% end %>
