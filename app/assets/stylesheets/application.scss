@@ -125,3 +125,21 @@ h3 {
 .language a {
   color: #49473f;
 }
+
+input[type=text], textarea {
+  @extend .form-control;
+  width: 100%;
+}
+
+input[type=submit] {
+  margin-top: 15px;
+}
+
+label {
+  margin-top: 15px;
+  width: 100%;
+}
+
+.form-group {
+  width: 30%;
+}
