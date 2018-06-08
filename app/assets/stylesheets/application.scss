@@ -126,9 +126,13 @@ h3 {
   color: #49473f;
 }
 
-input[type=text], textarea {
+input[type=text], textarea, input[type=email], input[type=password] {
   @extend .form-control;
   width: 100%;
+}
+
+input[type=text], textarea, input[type=email], input[type=password], input[type=checkbox], .chosen-container {
+  margin-bottom: 15px;
 }
 
 input[type=submit] {
@@ -141,5 +145,5 @@ label {
 }
 
 .form-group {
-  width: 30%;
+  width: 300px;
 }
