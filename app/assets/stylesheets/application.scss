@@ -35,6 +35,20 @@ footer {
   margin-bottom: 25px;
 }
 
+a {
+  text-decoration: underline;
+  color: #0056b3;
+}
+
+a:hover {
+  color: #0066d4;
+}
+
+a.logo-text {
+  text-decoration: none;
+  outline: none;
+}
+
 a.logo-text:hover {
   text-decoration: none;
 }
