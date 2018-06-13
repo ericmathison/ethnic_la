@@ -115,7 +115,6 @@ h3 {
   box-shadow: 0 10px 6px -6px #49473f;
   border: solid 2px #626155;
   margin: 25px;
-  padding: 50px 18px;
   font-size: 24px;
   text-align: center;
   font-weight: bold;
@@ -123,8 +122,16 @@ h3 {
   background: #afac97;
 }
 
+.language p {
+  height: 100%;
+}
+
 .language a {
   color: #49473f;
+  display: block;
+  padding: 50px 18px;
+  width: 100%;
+  height: 100%;
 }
 
 input[type=text], textarea, input[type=email], input[type=password] {
