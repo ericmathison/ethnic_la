@@ -170,3 +170,14 @@ label {
 .form-group {
   width: 300px;
 }
+
+.page-item.active .page-link {
+  background: #004085;
+  border-color: #004085;
+}
+
+.page-link {
+  color: #0056b3;
+  background: #f6f2e5;
+  border: 1px solid #dbd8cc;
+}
