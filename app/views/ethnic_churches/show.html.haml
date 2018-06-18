@@ -5,7 +5,7 @@
     %p#website= @ethnic_church.website || '-'
 
     %h3.title-with-emphasis Address:
-    %p#address= @ethnic_church.address.full_address || '-'
+    #address= simple_format(@ethnic_church.address.full_address || '-')
 
     %h3.title-with-emphasis Phone:
     %p#phone= @ethnic_church.phone || '-'
@@ -26,6 +26,6 @@
     %p#religious_background= @ethnic_church.religious_background.persuasion || '-'
 
     %h3.title-with-emphasis Notes:
-    %p#note= @ethnic_church.note.try(:content) || '-'
+    #note= simple_format(@ethnic_church.note.try(:content) || '-')
 
     %p= link_to 'Edit', edit_ethnic_church_path(@ethnic_church)
