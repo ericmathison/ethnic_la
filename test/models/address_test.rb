@@ -11,7 +11,15 @@ class AddressTest < ActiveSupport::TestCase
   test 'Address#full_address returns "CA" when all fields are nil' do
     addr = Address.new
     expected_address =  'CA'
+    assert_equal expected_address, addr.full_address
+  end
 
+  test 'Address#full_address returns "CA" when all strings are blank' do
+    addr = Address.new
+    addr.street = ''
+    addr.city = ''
+    addr.zip = ''
+    expected_address =  'CA'
     assert_equal expected_address, addr.full_address
   end
 
