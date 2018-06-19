@@ -1,6 +1,6 @@
 # Ethnic LA
 
-An ethnographic research project based on ethnic churches in the Los Angeles area
+Facilitating the discovery of ethnic groups in Los Angeles by making data about languages, cultures, and their location more accessible. We hope to promote cultural understanding through enabling more cross-cultural interactions.
 
 ## Running Tests
 
