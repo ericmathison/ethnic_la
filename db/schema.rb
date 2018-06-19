@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_06_17_104340) do
+ActiveRecord::Schema.define(version: 2018_06_19_082349) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -59,6 +59,7 @@ ActiveRecord::Schema.define(version: 2018_06_17_104340) do
     t.string "email"
     t.bigint "country_id"
     t.bigint "religious_background_id"
+    t.boolean "unconfirmed"
     t.index ["country_id"], name: "index_ethnic_churches_on_country_id"
     t.index ["religious_background_id"], name: "index_ethnic_churches_on_religious_background_id"
   end
