@@ -1,5 +1,7 @@
 .row.justify-content-center
   .jumbotron.col-9
+    - if @ethnic_church.unconfirmed
+      %p.alert.alert-warning The existence of this church cannot be confirmed.
     %h2#church_name= @ethnic_church.name
     %h3.title-with-emphasis Website:
     %p#website= @ethnic_church.website || '-'
