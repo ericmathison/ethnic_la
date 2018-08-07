@@ -47,7 +47,8 @@ group :development, :test do
   gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]
   # Adds support for Capybara system testing and selenium driver
   gem 'capybara'
-  gem 'capybara-webkit'
+  gem 'capybara-webkit', :git => 'https://github.com/thoughtbot/capybara-webkit.git', :branch => 'master'
+
 end
 
 group :development do

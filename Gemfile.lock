@@ -1,3 +1,12 @@
+GIT
+  remote: https://github.com/thoughtbot/capybara-webkit.git
+  revision: 41c43062677c1628e09f9dc00dc24528ba161ed7
+  branch: master
+  specs:
+    capybara-webkit (1.15.0)
+      capybara (>= 2.3, < 4.0)
+      json
+
 GEM
   remote: https://rubygems.org/
   specs:
@@ -64,9 +73,6 @@ GEM
       rack (>= 1.6.0)
       rack-test (>= 0.6.3)
       xpath (~> 3.1)
-    capybara-webkit (1.15.0)
-      capybara (>= 2.3, < 4.0)
-      json
     coffee-rails (4.2.2)
       coffee-script (>= 2.2.0)
       railties (>= 4.0.0)
@@ -228,7 +234,7 @@ DEPENDENCIES
   bootstrap (~> 4.1.1)
   byebug
   capybara
-  capybara-webkit
+  capybara-webkit!
   coffee-rails (~> 4.2)
   devise
   haml
