@@ -1,7 +1,7 @@
 .language_list
   - @languages.each do |lang|
     .language
-      %p= link_to(lang[:name] || 'Unknown', language_path(lang[:id]))
+      %p= link_to(lang.name || 'Unknown', language_path(lang.id))
 %footer
   - if admin_signed_in?
     = link_to('Logout', destroy_admin_session_path, method: :delete)
