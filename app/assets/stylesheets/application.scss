@@ -125,27 +125,24 @@ h3 {
   -webkit-flex-basis: 200px;
   flex-basis: 200px;
   height: 200px;
-  background: #ddd;
   box-shadow: 0 10px 6px -6px #49473f;
-  border: solid 2px #626155;
   margin: 25px;
   font-size: 24px;
   text-align: center;
   font-weight: bold;
   box-style: border-box;
   background: #afac97;
-}
-
-.language p {
-  height: 100%;
+  border-radius: 4px;
 }
 
 .language a {
-  color: #49473f;
+  color: #f2ecd0;
   display: block;
   padding: 50px 18px;
   width: 100%;
   height: 100%;
+  padding-bottom: 5px;
+  font-size: 15px;
   text-decoration: none;
 }
 
@@ -185,4 +182,42 @@ label {
 .page-item.disabled .page-link {
   background: #f6f2e5;
   border: 1px solid #dbd8cc;
+}
+
+.lang-endonym {
+  font-size: 50px;
+}
+
+.bulgarian, .armenian, .burmese, .fijian, .oromo, .french, .tongan {
+  .lang-endonym {
+    font-size: 25px;
+  }
+}
+
+.french, .danish, .estonian, .german, .greek, .hungarian, .latvian, .lithuanian, .portuguese, .romanian, .russian, .samoan, .polish, .spanish, .swedish, .ukrainian, .vietnamese, .marshallese, .mongolian, .lingala, .kachin {
+  .lang-endonym {
+    font-size: 30px;
+  }
+}
+
+.malayalam, .gujarati, .kikuyu, .serbian {
+  .lang-endonym {
+    font-size: 40px;
+  }
+}
+
+.urdu {
+  .lang-endonym {
+    font-size: 70px;
+    margin-top: -25px;
+  }
+}
+
+
+$languages: world-map, pattern, diamond-tiles, dingy-yellow-wall, stone-wall, rock-pattern, mexican-tribal-zapotec, mossy-stone-wall, amharic, arabic, aramaic-syriac, armenian, bahasa-indonesian, batak-indonesian, bengali, bulgarian, burmese, cantonese, chinese, danish, estonian, farsi, fijian, filipino, german, greek, gujarati, hindi, hmong, hungarian, igbo, indigenous-north-american-languages, indonesian, japanese, kachin, khmer, kikuyu, korean, lao, latvian, lingala, lithuanian, luhya, malayalam, mandarin, marshallese, mongolian, nepalese, norwegian, oromo, polish, portuguese, punjabi, romani, romanian, samoan, serbian, taiwanese, tamil, telugu, thai, tongan, russian, spanish, swedish, ukrainian, urdu, vietnamese;
+
+@each $lang in $languages {
+  .#{$lang} {
+    background: linear-gradient(rgba(0,0,0,.4), rgba(0,0,0,.4)), url(image-path('#{$lang}.jpg'));
+  }
 }
