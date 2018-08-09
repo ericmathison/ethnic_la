@@ -4,8 +4,3 @@
       = link_to(language_path(lang.id)) do
         %p.lang-endonym= lang.endonym
         %p= lang.name || 'Unknown'
-%footer
-  - if admin_signed_in?
-    = link_to('Logout', destroy_admin_session_path, method: :delete)
-  - else
-    = link_to('Admin Login', new_admin_session_path)
