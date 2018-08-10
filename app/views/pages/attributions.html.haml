@@ -1,0 +1,7 @@
+.jumbotron.col-9
+  %h1.text-center Attributions
+  %h2 Language Image Credits:
+
+  - @attributions.each do |language, url|
+    %h3.title-with-emphasis= language
+    %p= link_to(url, url)

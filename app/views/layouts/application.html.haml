@@ -31,3 +31,5 @@
           = link_to('Logout', destroy_admin_session_path, id: 'logout', method: :delete)
         - else
           = link_to('Admin Login', new_admin_session_path, id: 'login')
+        = ' - '
+        = link_to('Attributions', attributions_path)
