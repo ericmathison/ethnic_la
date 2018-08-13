@@ -223,3 +223,9 @@ $languages: world-map, pattern, diamond-tiles, dingy-yellow-wall, stone-wall, ro
     background: linear-gradient(rgba(0,0,0,.4), rgba(0,0,0,.4)), url(image-path('#{$lang}.jpg'));
   }
 }
+
+.heatmap_area {
+  height: 500px;
+  width: 800px;
+  margin: 0 auto;
+}
