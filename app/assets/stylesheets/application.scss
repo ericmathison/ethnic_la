@@ -170,11 +170,6 @@ label {
   width: 300px;
 }
 
-.page-item.active .page-link {
-  background: #004085;
-  border-color: #004085;
-}
-
 .page-link {
   color: #0056b3;
   background: #f6f2e5;
@@ -184,6 +179,16 @@ label {
 .page-item.disabled .page-link {
   background: #f6f2e5;
   border: 1px solid #dbd8cc;
+}
+
+.page-item .page-link:hover {
+  background: #e3e0d4;
+  border: 1px solid #d6d3c8;
+}
+
+.page-item.active .page-link {
+  background: #004085;
+  border-color: #004085;
 }
 
 .lang-endonym {
