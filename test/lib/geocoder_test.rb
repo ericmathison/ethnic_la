@@ -21,4 +21,14 @@ class GeocoderTest < ActiveSupport::TestCase
     assert_in_delta geocoder.latitude, 33.94469, 0.001
     assert_in_delta geocoder.longitude, -118.39817, 0.001
   end
+
+  test '#latitude and #longitude return nil when results indicate bad address' do
+    results = '{"error":"Could not geocode address. Postal code or city required."}'
+
+    geocoder = Geocoder.new('', '')
+    geocoder.instance_variable_set(:@results, results)
+
+    assert_nil geocoder.latitude
+    assert_nil geocoder.longitude
+  end
 end

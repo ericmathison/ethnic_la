@@ -22,11 +22,13 @@ class Geocoder
 
   def latitude
     request_results
-    JSON.parse(@results)['results'][0]['location']['lat'].to_f
+    lat = JSON.parse(@results).dig('results', 0, 'location', 'lat')
+    lat.to_f if lat
   end
 
   def longitude
     request_results
-    JSON.parse(@results)['results'][0]['location']['lng'].to_f
+    lng = JSON.parse(@results).dig('results', 0, 'location', 'lng')
+    lng.to_f if lng
   end
 end
