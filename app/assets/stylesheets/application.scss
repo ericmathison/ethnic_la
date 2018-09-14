@@ -195,6 +195,11 @@ label {
   font-size: 50px;
 }
 
+.mapboxgl-map {
+  height: 500px;
+  margin-bottom: 30px;
+}
+
 .bulgarian, .armenian, .burmese, .fijian, .oromo, .french, .tongan {
   .lang-endonym {
     font-size: 25px;

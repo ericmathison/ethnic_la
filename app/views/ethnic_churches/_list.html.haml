@@ -1,22 +1,16 @@
-%main
-  %h2{class: 'mb-5'}
-    - if @language
-      = @language.name
-      = ' - '
-    = 'Los Angeles Area Ethnic Churches'
-  %table{class: 'table table-striped'}
-    %thead
+%table{class: 'table table-striped'}
+  %thead
+    %tr
+      %th
+        %strong Church Name
+      %th Language
+      %th City
+      %th Website
+  %tbody
+    - @ethnic_churches.each do |church|
       %tr
-        %th
-          %strong Church Name
-        %th Language
-        %th City
-        %th Website
-    %tbody
-      - @ethnic_churches.each do |church|
-        %tr
-          %td= link_to(church.name, ethnic_church_path(church))
-          %td.language-name= church.languages.map(&:name).join(', ')
-          %td= church.address.city
-          %td= church.website
-  = paginate @ethnic_churches
+        %td= link_to(church.name, ethnic_church_path(church))
+        %td.language-name= church.languages.map(&:name).join(', ')
+        %td= church.address.city
+        %td= church.website
+= paginate @ethnic_churches

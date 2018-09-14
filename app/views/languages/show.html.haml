@@ -1,1 +1,10 @@
-= render 'ethnic_churches/list'
+%main
+  %h2{class: 'mb-5'}
+    - if @language
+      = @language.name
+      = ' - '
+    = 'Los Angeles Area Ethnic Churches'
+  #map
+  %script
+    = render 'map.js'
+  = render 'ethnic_churches/list'

@@ -1,0 +1,57 @@
+mapboxgl.accessToken = 'pk.eyJ1IjoiZXRobmljbGEiLCJhIjoiY2psZTM1Z3dnMGh1aTNrb3lnb3YzZzMzeSJ9.5HGT4cTIUGjgFrfJGW0bXg';
+var map = new mapboxgl.Map({
+    container: 'map',
+    style: 'mapbox://styles/ethnicla/cjlhdx9ii05o82rp9w6r1008s',
+    center: [-118, 33.91],
+    zoom: 8.5
+});
+
+map.scrollZoom.disable();
+
+map.on('load', function() {
+    map.addSource('language-map', {
+        "type": "geojson",
+        "data": {
+          "type": "FeatureCollection",
+          "features": [
+            <%- @language.ethnic_churches.find_each do |ec| %>
+            { "type": "Feature", "geometry": { "type": "Point", "coordinates": [ <%= ec.address.longitude %>, <%= ec.address.latitude %> ] } },
+            <%- end %>
+            { "type": "Feature", "geometry": { "type": "Point", "coordinates": [ ] } }
+          ]
+        }
+    });
+
+    map.addLayer({
+        "id": "language-heatmap",
+        "type": "heatmap",
+        "source": "language-map",
+        "paint": {
+          "heatmap-weight": 0.54,
+          "heatmap-radius": 17,
+          "heatmap-color": [
+              "interpolate",
+              [
+                  "linear"
+              ],
+              [
+                  "heatmap-density"
+              ],
+              0,
+              "rgba(0, 0, 255, 0)",
+              0.1,
+              "hsl(225, 73%, 57%)",
+              0.3,
+              "cyan",
+              0.5,
+              "lime",
+              0.7,
+              "yellow",
+              1,
+              "red"
+          ]
+
+        }
+    });
+
+});
