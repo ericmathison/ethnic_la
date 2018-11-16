@@ -1,0 +1,130 @@
+#!/bin/bash
+
+# Sets up everything needed to run Ethnic LA on a VPS
+
+# Run this script as a root user
+
+USER=deploy
+SSH_CONFIG_FILE=/etc/ssh/sshd_config
+NGINX_SITE_CONFIG_FILE=/etc/nginx/sites-available/default
+SERVER_IP=69.28.67.250
+APP_NAME=ethnic_la
+DOMAIN=ethnicla.com
+GITHUB_USERNAME=ericmathison
+GIT_REPO=https://github.com/ericmathison/ethnic_la.git
+DATABASE_CONFIG_FILE=/home/$USER/$APP_NAME/config/database.yml
+
+groupadd admin
+useradd -G admin $USER
+
+echo 'Please enter a password for new user: '
+passwd $USER
+
+mkdir /home/$USER
+chown $USER:$USER /home/$USER
+
+apt-get update &&
+apt-get upgrade &&
+apt-get install postgresql libpq-dev git ufw build-essential nodejs
+
+echo 'Setting up firewall'
+ufw allow 22
+ufw allow 80
+ufw allow 443
+ufw enable
+
+chsh -s /bin/bash $USER
+
+cat <(echo -e "PermitRootLogin no\nPasswordAuthentication no\nAllowUsers $USER\n") $SSH_CONFIG_FILE > $SSH_CONFIG_FILE.tmp
+mv $SSH_CONFIG_FILE.tmp $SSH_CONFIG_FILE
+
+echo 'setting up nginx config'
+echo "
+server {
+        listen 80;
+        listen [::]:80;
+        server_name $DOMAIN $SERVER_IP;
+        root /home/$USER/$APP_NAME/public;
+
+        location / {
+                try_files \$uri @$APP_NAME;
+        }
+
+        location @$APP_NAME {
+                proxy_pass http://localhost:3000;
+                proxy_set_header  Host \$host;
+                proxy_set_header X-Forwarded-Proto \$scheme;
+        }
+}
+" > $NGINX_SITE_CONFIG_FILE
+
+ln -sf /etc/nginx/sites-available/default /etc/nginx/sites-enabled/default
+
+echo 'setting up ssl'
+apt-get install software-properties-common
+add-apt-repository ppa:certbot/certbot
+apt-get update
+apt-get install python-certbot-nginx
+certbot --nginx
+
+su $USER <<RUN_WITHOUT_ROOT
+cd
+git clone $GIT_REPO
+
+mkdir -p ~/.ssh
+cd ~/.ssh
+wget 'https://github.com/$GITHUB_USERNAME.keys'
+cat $GITHUB_USERNAME.keys >> authorized_keys
+
+dd if=/dev/zero of=~/swapfile bs=1024 count=1024000
+mkswap ~/swapfile
+RUN_WITHOUT_ROOT
+
+swapon /home/$USER/swapfile
+
+echo 'setting up ruby'
+su $USER <<'RUN_WITHOUT_ROOT'
+dir=/tmp/ruby-install
+tarball=/tmp/ruby-install.tar.gz
+wget -O $tarball https://api.github.com/repos/postmodern/ruby-install/tarball
+mkdir $dir
+tar -C $dir -xvzf $tarball --strip-components 1
+cd $dir
+RUN_WITHOUT_ROOT
+
+(cd /tmp/ruby-install
+make install)
+
+ruby_dir=$(ls -td /home/$USER/.rubies/* | head -1)/bin
+su $USER <<RUN_WITHOUT_ROOT
+ruby-install ruby -- --disable-install-rdoc
+
+echo "PATH=$ruby_dir:"'\$PATH' >> /home/$USER/.bash_profile
+RUN_WITHOUT_ROOT
+
+echo -e "\nRun this command locally to copy master key to server:"
+echo -e "rsync -av config/master.key $USER@$DOMAIN:/home/$USER/$APP_NAME/config\n"
+read -p "Hit enter after running above command"
+
+su -l $USER <<RUN_WITHOUT_ROOT
+cd /home/$USER/$APP_NAME
+gem install bundler
+bundle --without development test
+
+echo "production:
+  adapter: postgresql
+  encoding: unicode
+  pool: <%= ENV.fetch('RAILS_MAX_THREADS') { 5 } %>
+  database: ${APP_NAME}_production" >> $DATABASE_CONFIG_FILE
+
+sudo -u postgres createuser -s $USER
+
+rails db:create RAILS_ENV=production
+rails assets:precompile RAILS_ENV=production
+RUN_WITHOUT_ROOT
+
+echo "Now you should copy the database up to the server like so (db name will vary):"
+echo -e "rsync -av database.sql.gz $USER@$DOMAIN:/home/$USER\n"
+
+echo "After that import the database like this:"
+echo "gunzip < database.sql.gz | psql ${APP_NAME}_production"
