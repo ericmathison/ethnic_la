@@ -34,7 +34,7 @@ gem 'jbuilder', '~> 2.5'
 # gem 'capistrano-rails', group: :development
 
 gem 'haml'
-gem 'bootstrap', '~> 4.1.1'
+gem 'bootstrap'
 gem 'jquery-rails'
 gem 'devise'
 gem 'kaminari'
