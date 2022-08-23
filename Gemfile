@@ -5,7 +5,7 @@ git_source(:github) do |repo_name|
   "https://github.com/#{repo_name}.git"
 end
 
-ruby '2.7.2'
+ruby '3.0.4'
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '~> 6.1.6'
@@ -39,9 +39,10 @@ gem 'bootstrap'
 gem 'jquery-rails'
 gem 'devise'
 gem 'kaminari'
+gem 'rexml'
 
 # Reduces boot times through caching; required in config/boot.rb
-gem 'bootsnap', '>= 1.1.0', require: false
+gem 'bootsnap', '>= 1.13.0', require: false
 
 gem 'typhoeus'
 
