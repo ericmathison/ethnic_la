@@ -4,6 +4,7 @@ class ReligionsController < ApplicationController
     @center_counts = ReligionMembership.joins(:religious_center)
                                        .merge(ReligiousCenter.visible_to(admin_signed_in?))
                                        .group(:religion_id).count
+    @ethnic_church_count = EthnicChurch.count
   end
 
   def show

@@ -319,3 +319,13 @@ $languages: world-map, pattern, diamond-tiles, dingy-yellow-wall, stone-wall, ro
     background: #2f6fd6;
   }
 }
+
+.site-nav .menu-subtitle {
+  font-size: 13px;
+  opacity: 0.8;
+}
+
+.site-nav .dropdown-item.active, .site-nav .dropdown-item:active {
+  background: #49473f;
+  color: #f2ecd0;
+}

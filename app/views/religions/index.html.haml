@@ -1,8 +1,12 @@
 %main
   %h2{class: 'mb-4'} Los Angeles Area Religious Centers
   .language_list
+    .language.diamond-tiles#christianity-tile
+      = link_to(root_path) do
+        %p.lang-endonym.religion-name Christianity
+        %p= pluralize(@ethnic_church_count, 'ethnic church', plural: 'ethnic churches')
     - @religions.each do |religion|
-      .language{ class: cycle('diamond-tiles', 'dingy-yellow-wall') }
+      .language{ class: cycle('dingy-yellow-wall', 'diamond-tiles') }
         = link_to(religion_path(religion)) do
           %p.lang-endonym.religion-name= religion.name
           %p= pluralize(@center_counts.fetch(religion.id, 0), 'center')

@@ -12,20 +12,27 @@
     %nav.navbar.navbar-expand.site-nav
       .container-fluid.justify-content-center
         %ul.navbar-nav
-          %li.nav-item
-            = link_to('Ethnic Churches', root_path, class: ['nav-link', ('active' if controller_name.in?(%w[ethnic_churches languages]))], id: 'nav-ethnic-churches')
           %li.nav-item.dropdown
-            %a.nav-link.dropdown-toggle#nav-religions{ href: '#', role: 'button', class: ('active' if controller_name == 'religions'), data: { bs_toggle: 'dropdown' }, aria: { expanded: 'false' } } Religions
+            %a.nav-link.dropdown-toggle#nav-religions{ href: '#', role: 'button', data: { bs_toggle: 'dropdown' }, aria: { expanded: 'false' } }
+              Religion:
+              %strong= current_religion_label
             %ul.dropdown-menu{ aria: { labelledby: 'nav-religions' } }
-              %li= link_to('All religions', religions_path, class: 'dropdown-item')
+              %li
+                = link_to(root_path, class: ['dropdown-item', ('active' if viewing_ethnic_churches?)], id: 'nav-christianity', aria: { current: ('page' if viewing_ethnic_churches?) }) do
+                  Christianity
+                  %span.menu-subtitle (ethnic churches)
               %li
                 %hr.dropdown-divider
               - menu_religions.each do |religion|
+                - current = religion == @religion
                 %li
-                  = link_to(religion_path(religion), class: 'dropdown-item') do
+                  = link_to(religion_path(religion), class: ['dropdown-item', ('active' if current)], aria: { current: ('page' if current) }) do
                     = religion.name
                     - if religion.admin_only
                       %span.admin-only-label (admins only)
+              %li
+                %hr.dropdown-divider
+              %li= link_to('All religions', religions_path, class: ['dropdown-item', ('active' if controller_name == 'religions' && action_name == 'index')])
     = link_to(root_path, class: 'logo-text') do
       %header
         = image_tag 'koreanbell.png', size: '300x164', class: 'logo-image'

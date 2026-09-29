@@ -41,9 +41,20 @@ class ReligionsTest < ActionDispatch::IntegrationTest
     assert_response :not_found
   end
 
+  test 'menu lists Christianity first and labels the religion being viewed' do
+    get root_path
+    assert_select '#nav-religions strong', text: 'Christianity'
+    assert_select '.dropdown-menu li:first-child a#nav-christianity.active[href="/"]', text: /Christianity/
+
+    get religion_path(religions(:buddhism))
+    assert_select '#nav-religions strong', text: 'Buddhism'
+    assert_select '.dropdown-item.active', text: 'Buddhism'
+  end
+
   test 'public menu and index list only public religions' do
     get religions_path
 
+    assert_select '#christianity-tile a[href="/"]', text: /Christianity/
     assert_select '.dropdown-item', text: 'Buddhism'
     assert_select '.dropdown-item', text: /Other/, count: 0
     assert_select '.dropdown-item', text: 'Jainism', count: 0

@@ -4,6 +4,18 @@ module ApplicationHelper
     return false
   end
 
+  # Ethnic churches (Christianity) are the site's home page and default religion.
+  def viewing_ethnic_churches?
+    controller_name.in?(%w[ethnic_churches languages])
+  end
+
+  def current_religion_label
+    return @religion.name if @religion
+    return 'All' if controller_name == 'religions'
+
+    'Christianity'
+  end
+
   # Religions listed in the navigation menu for the current visitor
   def menu_religions
     @menu_religions ||= Religion.visible_to(admin_signed_in?).to_a
