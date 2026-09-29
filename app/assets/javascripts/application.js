@@ -15,5 +15,4 @@
 //= require jquery3
 //= require popper
 //= require bootstrap-sprockets
-//= require ethnic_churches
 //= require chosen.jquery.js

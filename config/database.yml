@@ -80,6 +80,7 @@ test:
 #
 production:
   <<: *default
+  host: <%= ENV["DB_HOST"] %>
   database: ethnic_la_production
   username: ethnic_la
   password: <%= ENV['ETHNIC_LA_DATABASE_PASSWORD'] %>

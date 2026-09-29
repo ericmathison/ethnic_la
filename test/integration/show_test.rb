@@ -11,7 +11,7 @@ class HomePageTest < ActionDispatch::IntegrationTest
     assert_select '#website', { text: ec.website }
     assert_select '#pastors_name', { text: ec.pastors_name }
     assert_select '#email', { text: ec.email }
-    assert_select '#address', { text: ec.address.full_address }
+    assert_select '#address', { text: ec.address.full_address.squish }
     assert_select '#language', { text: Regexp.new(ec.languages.first.name) }
     assert_select '#country', { text: ec.country.name }
     assert_select '#religious_background', { text: ec.religious_background.persuasion }

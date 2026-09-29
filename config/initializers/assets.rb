@@ -10,3 +10,7 @@ Rails.application.config.assets.version = "1.0"
 # application.js, application.css, and all non-JS/CSS in the app/assets
 # folder are already added.
 # Rails.application.config.assets.precompile += %w( admin.js admin.css )
+
+# Bootstrap still uses Sass @import; don't flood the logs with its deprecation warnings.
+Rails.application.config.sass.quiet_deps = true
+Rails.application.config.sass.silence_deprecations = [ "import" ]
