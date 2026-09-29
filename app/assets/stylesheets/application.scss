@@ -12,6 +12,11 @@
  *
  */
 
+// Bootstrap 5.3 gives tables a white background; keep them transparent so the
+// page background shows through, as in Bootstrap 5.2.
+$table-bg: transparent;
+$table-color: var(--bs-body-color);
+
 @import "bootstrap";
 @import "chosen";
 
