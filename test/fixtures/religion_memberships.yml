@@ -1,0 +1,23 @@
+verified_temple:
+  religion: buddhism
+  religious_center: verified_temple
+
+uncertain_temple:
+  religion: buddhism
+  religious_center: uncertain_temple
+
+unverified_house:
+  religion: buddhism
+  religious_center: unverified_house
+
+missing_center:
+  religion: buddhism
+  religious_center: missing_center
+
+other_center:
+  religion: other
+  religious_center: other_center
+
+jain_house:
+  religion: jainism
+  religious_center: jain_house

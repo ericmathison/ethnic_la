@@ -1,0 +1,12 @@
+buddhism:
+  name: Buddhism
+  slug: buddhism
+
+jainism:
+  name: Jainism
+  slug: jainism
+
+other:
+  name: Other
+  slug: other
+  admin_only: true

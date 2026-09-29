@@ -1,0 +1,40 @@
+- if religious_centers.empty?
+  %p.no-centers No centers are listed yet.
+- religious_centers.group_by { |center| center.city.presence || 'City unknown' }.each do |city, centers|
+  %h3.city-heading= city
+  %table.table.table-striped.religious-centers
+    %thead
+      %tr
+        %th Name
+        %th Community / tradition
+        %th Address
+        %th Phone
+        %th Website
+    %tbody
+      - centers.each do |center|
+        %tr{ id: dom_id(center) }
+          %td.center-name
+            = center.name
+            - if admin_signed_in?
+              - unless center.verified?
+                %span.badge.center-status{ class: "status-#{center.status.dasherize}" }= center.status_label
+              - if center.name_uncertain
+                %span.badge.name-uncertain Name uncertain
+              - if center.leader.present? || center.email.present? || center.notes.present?
+                .admin-details
+                  - if center.leader.present?
+                    .leader
+                      %strong Leader:
+                      = center.leader
+                  - if center.email.present?
+                    .email
+                      %strong Email:
+                      = center.email
+                  - if center.notes.present?
+                    .notes
+                      %strong Notes:
+                      = simple_format(center.notes, {}, wrapper_tag: 'span')
+          %td= center.community
+          %td.address= simple_format(center.full_address, {}, wrapper_tag: 'span')
+          %td.phone= center.phone
+          %td.website= website_link(center.website)

@@ -238,3 +238,84 @@ $languages: world-map, pattern, diamond-tiles, dingy-yellow-wall, stone-wall, ro
     background: linear-gradient(rgba(0,0,0,.4), rgba(0,0,0,.4)), url(image-path('#{$lang}.jpg'));
   }
 }
+
+.site-nav {
+  background: #49473f;
+
+  .nav-link {
+    color: #f2ecd0;
+    text-decoration: none;
+  }
+
+  .nav-link:hover, .nav-link:focus, .nav-link.active {
+    color: #ffffff;
+  }
+
+  .dropdown-menu {
+    background: #f6f2e5;
+    max-height: 70vh;
+    overflow-y: auto;
+  }
+
+  .dropdown-item {
+    text-decoration: none;
+  }
+}
+
+.admin-only-label {
+  font-size: 12px;
+  font-style: italic;
+}
+
+.religion-name {
+  font-size: 26px;
+}
+
+.city-heading {
+  margin: 30px 12px 10px;
+  font-family: 'Passion One', Helvetica;
+  font-size: 26px;
+}
+
+.religious-centers {
+  .center-name {
+    font-weight: bold;
+    width: 30%;
+  }
+
+  .admin-details {
+    font-weight: normal;
+    font-size: 13px;
+    margin-top: 6px;
+  }
+}
+
+.center-status.status-unverified, .legend-pin.unverified {
+  background: #e8a33d;
+}
+
+.center-status.status-not-found, .legend-pin.not-found {
+  background: #8b8b8b;
+}
+
+.name-uncertain {
+  background: #6c757d;
+}
+
+.map-legend {
+  margin-left: 12px;
+}
+
+.legend-pin {
+  display: inline-block;
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  border: 1px solid #ffffff;
+  margin: 0 4px 0 12px;
+  vertical-align: middle;
+
+  &.verified {
+    background: #2f6fd6;
+  }
+}

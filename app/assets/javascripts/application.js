@@ -16,3 +16,4 @@
 //= require popper
 //= require bootstrap-sprockets
 //= require chosen.jquery.js
+//= require heatmap

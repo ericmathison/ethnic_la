@@ -1,0 +1,53 @@
+verified_temple:
+  name: Verified Temple
+  street: 100 Main St
+  city: Los Angeles
+  zip: '90012'
+  phone: 213-555-0100
+  website: http://verified.example.org
+  community: Thai
+  latitude: 34.05
+  longitude: -118.24
+  status: verified
+  leader: Rev. Private Leader
+  email: private@example.com
+  notes: Private visit note
+  source_row: 2
+
+uncertain_temple:
+  name: Uncertain Name Temple
+  street: 200 Oak Ave
+  city: Pasadena
+  status: verified
+  name_uncertain: true
+  source_row: 3
+
+unverified_house:
+  name: Unverified House Temple
+  street: 300 Elm St
+  city: Alhambra
+  latitude: 34.09
+  longitude: -118.13
+  status: unverified
+  source_row: 4
+
+missing_center:
+  name: Missing Center
+  street: 400 Pine St
+  city: Rosemead
+  latitude: 34.08
+  longitude: -118.07
+  status: not_found
+  source_row: 5
+
+other_center:
+  name: New Movement Center
+  city: Los Angeles
+  status: verified
+  source_row: 6
+
+jain_house:
+  name: Jain House Center
+  city: Artesia
+  status: unverified
+  source_row: 7

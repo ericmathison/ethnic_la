@@ -43,3 +43,6 @@
 
 # Ignore database dumps.
 /*.sql
+
+# Private working data.
+/data/

@@ -4,7 +4,5 @@
       = @language.name
       = ' - '
     = 'Los Angeles Area Ethnic Churches'
-  #map
-  %script
-    = render partial: 'map', formats: [:js]
+  = render 'shared/heatmap', points: church_map_points(@language.ethnic_churches)
   = render 'ethnic_churches/list'

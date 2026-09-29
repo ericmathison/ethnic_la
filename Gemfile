@@ -50,6 +50,9 @@ group :development, :test do
   # Adds support for Capybara system testing and selenium driver
   gem 'capybara'
   gem 'selenium-webdriver'
+  # Read and write Excel workbooks for the religious centers data cleanup
+  gem 'roo', require: false
+  gem 'caxlsx', require: false
 end
 
 group :development do

@@ -11,4 +11,5 @@ Rails.application.routes.draw do
   get 'attributions' => 'pages#attributions', as: :attributions
 
   resources :ethnic_churches
+  resources :religions, only: %i[index show]
 end

@@ -23,3 +23,6 @@
 
 # Ignore all environment files.
 /.env*
+
+# Private working data (religious centers source files, review workbooks, geocode cache).
+/data/

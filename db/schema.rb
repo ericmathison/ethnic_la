@@ -10,9 +10,9 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2018_08_25_085348) do
+ActiveRecord::Schema[8.1].define(version: 2026_09_29_180000) do
   # These are extensions that must be enabled in order to support this database
-  enable_extension "plpgsql"
+  enable_extension "pg_catalog.plpgsql"
 
   create_table "addresses", force: :cascade do |t|
     t.string "street"
@@ -81,11 +81,54 @@ ActiveRecord::Schema[7.0].define(version: 2018_08_25_085348) do
     t.index ["ethnic_church_id"], name: "index_notes_on_ethnic_church_id"
   end
 
+  create_table "religion_memberships", force: :cascade do |t|
+    t.bigint "religion_id", null: false
+    t.bigint "religious_center_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["religion_id", "religious_center_id"], name: "index_religion_memberships_uniqueness", unique: true
+    t.index ["religion_id"], name: "index_religion_memberships_on_religion_id"
+    t.index ["religious_center_id"], name: "index_religion_memberships_on_religious_center_id"
+  end
+
+  create_table "religions", force: :cascade do |t|
+    t.string "name", null: false
+    t.string "slug", null: false
+    t.boolean "admin_only", default: false, null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["name"], name: "index_religions_on_name", unique: true
+    t.index ["slug"], name: "index_religions_on_slug", unique: true
+  end
+
   create_table "religious_backgrounds", force: :cascade do |t|
     t.string "persuasion"
     t.datetime "created_at", precision: nil, null: false
     t.datetime "updated_at", precision: nil, null: false
     t.index ["persuasion"], name: "index_religious_backgrounds_on_persuasion", unique: true
+  end
+
+  create_table "religious_centers", force: :cascade do |t|
+    t.string "name", null: false
+    t.string "street"
+    t.string "city"
+    t.string "zip"
+    t.string "phone"
+    t.string "website"
+    t.string "community"
+    t.float "latitude"
+    t.float "longitude"
+    t.string "status", default: "verified", null: false
+    t.string "leader"
+    t.string "email"
+    t.text "notes"
+    t.boolean "name_uncertain", default: false, null: false
+    t.string "geocode_match"
+    t.integer "source_row"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["source_row"], name: "index_religious_centers_on_source_row", unique: true
+    t.index ["status"], name: "index_religious_centers_on_status"
   end
 
   create_table "services", id: false, force: :cascade do |t|
@@ -99,4 +142,6 @@ ActiveRecord::Schema[7.0].define(version: 2018_08_25_085348) do
   add_foreign_key "ethnic_churches", "countries"
   add_foreign_key "ethnic_churches", "religious_backgrounds"
   add_foreign_key "notes", "ethnic_churches"
+  add_foreign_key "religion_memberships", "religions"
+  add_foreign_key "religion_memberships", "religious_centers"
 end

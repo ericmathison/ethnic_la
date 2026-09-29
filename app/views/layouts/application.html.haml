@@ -9,6 +9,23 @@
     = javascript_include_tag 'https://api.tiles.mapbox.com/mapbox-gl-js/v0.48.0/mapbox-gl.js'
     = stylesheet_link_tag    'https://api.tiles.mapbox.com/mapbox-gl-js/v0.48.0/mapbox-gl.css'
   %body
+    %nav.navbar.navbar-expand.site-nav
+      .container-fluid.justify-content-center
+        %ul.navbar-nav
+          %li.nav-item
+            = link_to('Ethnic Churches', root_path, class: ['nav-link', ('active' if controller_name.in?(%w[ethnic_churches languages]))], id: 'nav-ethnic-churches')
+          %li.nav-item.dropdown
+            %a.nav-link.dropdown-toggle#nav-religions{ href: '#', role: 'button', class: ('active' if controller_name == 'religions'), data: { bs_toggle: 'dropdown' }, aria: { expanded: 'false' } } Religions
+            %ul.dropdown-menu{ aria: { labelledby: 'nav-religions' } }
+              %li= link_to('All religions', religions_path, class: 'dropdown-item')
+              %li
+                %hr.dropdown-divider
+              - menu_religions.each do |religion|
+                %li
+                  = link_to(religion_path(religion), class: 'dropdown-item') do
+                    = religion.name
+                    - if religion.admin_only
+                      %span.admin-only-label (admins only)
     = link_to(root_path, class: 'logo-text') do
       %header
         = image_tag 'koreanbell.png', size: '300x164', class: 'logo-image'

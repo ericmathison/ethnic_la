@@ -1,0 +1,16 @@
+%main
+  %h2{class: 'mb-4'}= "#{@religion.name} - Los Angeles Area Religious Centers"
+  - if @religion.admin_only
+    %p.alert.alert-warning#admin-only-notice
+      Only admins can see this page. These centers need more research before they get a page of their own.
+  - if admin_signed_in?
+    %p.map-legend
+      Admin view: showing all centers.
+      %span.legend-pin.verified
+      Verified
+      %span.legend-pin.unverified
+      Unverified
+      %span.legend-pin.not-found
+      Listed but not found in person
+  = render 'shared/heatmap', points: center_map_points(@religious_centers), show_status: admin_signed_in?
+  = render 'religious_centers/list', religious_centers: @religious_centers

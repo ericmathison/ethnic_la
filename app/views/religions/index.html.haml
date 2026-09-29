@@ -1,0 +1,10 @@
+%main
+  %h2{class: 'mb-4'} Los Angeles Area Religious Centers
+  .language_list
+    - @religions.each do |religion|
+      .language{ class: cycle('diamond-tiles', 'dingy-yellow-wall') }
+        = link_to(religion_path(religion)) do
+          %p.lang-endonym.religion-name= religion.name
+          %p= pluralize(@center_counts.fetch(religion.id, 0), 'center')
+          - if religion.admin_only
+            %p.admin-only-label Admins only
