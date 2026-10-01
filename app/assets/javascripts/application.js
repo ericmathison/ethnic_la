@@ -17,3 +17,4 @@
 //= require bootstrap-sprockets
 //= require chosen.jquery.js
 //= require heatmap
+//= require school_language_map

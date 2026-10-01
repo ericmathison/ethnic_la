@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.1].define(version: 2026_09_29_180000) do
+ActiveRecord::Schema[8.1].define(version: 2026_10_01_200000) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_catalog.plpgsql"
 
@@ -131,6 +131,38 @@ ActiveRecord::Schema[8.1].define(version: 2026_09_29_180000) do
     t.index ["status"], name: "index_religious_centers_on_status"
   end
 
+  create_table "school_language_counts", force: :cascade do |t|
+    t.bigint "school_id", null: false
+    t.bigint "school_language_id", null: false
+    t.integer "year", null: false
+    t.integer "english_learners", null: false
+    t.index ["school_id"], name: "index_school_language_counts_on_school_id"
+    t.index ["school_language_id", "year", "school_id"], name: "index_school_language_counts_uniqueness", unique: true
+    t.index ["school_language_id"], name: "index_school_language_counts_on_school_language_id"
+  end
+
+  create_table "school_languages", force: :cascade do |t|
+    t.string "name", null: false
+    t.string "slug", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["name"], name: "index_school_languages_on_name", unique: true
+    t.index ["slug"], name: "index_school_languages_on_slug", unique: true
+  end
+
+  create_table "schools", force: :cascade do |t|
+    t.string "cds_code", null: false
+    t.string "name", null: false
+    t.string "district"
+    t.string "county"
+    t.string "city"
+    t.float "latitude"
+    t.float "longitude"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["cds_code"], name: "index_schools_on_cds_code", unique: true
+  end
+
   create_table "services", id: false, force: :cascade do |t|
     t.bigint "ethnic_church_id", null: false
     t.bigint "language_id", null: false
@@ -144,4 +176,6 @@ ActiveRecord::Schema[8.1].define(version: 2026_09_29_180000) do
   add_foreign_key "notes", "ethnic_churches"
   add_foreign_key "religion_memberships", "religions"
   add_foreign_key "religion_memberships", "religious_centers"
+  add_foreign_key "school_language_counts", "school_languages"
+  add_foreign_key "school_language_counts", "schools"
 end

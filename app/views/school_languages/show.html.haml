@@ -1,0 +1,52 @@
+%main.school-languages
+  %h2.mb-4= "#{@language.name} - Los Angeles Area English Learners"
+  = form_with(url: school_languages_path, method: :get, class: 'school-language-controls', id: 'school-language-form', local: true) do |form|
+    = form.label :language, 'Language', class: 'form-label', for: 'school-language-select'
+    = form.select :language, options_for_select(@languages.map { |language, total| ["#{language.name} (#{number_with_delimiter(total)})", language.slug] }, @language.slug), {}, class: 'form-select', id: 'school-language-select'
+    = form.hidden_field :year, value: @year, id: 'school-language-year-field'
+    %noscript= form.submit 'Show', class: 'btn btn-secondary'
+  .school-language-year
+    %label.form-label{ for: 'school-language-year' }
+      School year:
+      %strong#school-language-year-label= SchoolLanguage.school_year(@year)
+    .d-flex.align-items-center
+      %button.btn.btn-sm.btn-outline-secondary#school-language-play{ type: 'button' } Play
+      %input.form-range#school-language-year{ type: 'range', min: 0, max: @years.size - 1, step: 1, value: @years.index(@year) }
+  %p.school-language-total#school-language-total
+    %strong#school-language-total-count= number_with_delimiter(@totals.fetch(@year, 0))
+    = "English learners in Los Angeles area public schools spoke #{@language.name} at home in"
+    %span#school-language-total-year= SchoolLanguage.school_year(@year)
+  .school-language-map{ data: { points: @language.map_points(@years).to_json, years: @years.to_json, year: @year, language: @language.name } }
+  %h3.school-language-heading English learners by school year
+  .school-language-trend{ role: 'list' }
+    - max = [@totals.values.max.to_i, 1].max
+    - @years.each_with_index do |year, index|
+      - total = @totals.fetch(year, 0)
+      %button.trend-bar{ type: 'button', role: 'listitem', class: ('selected' if year == @year), data: { index: index },
+                         title: "#{SchoolLanguage.school_year(year)}: #{number_with_delimiter(total)}",
+                         aria: { label: "#{SchoolLanguage.school_year(year)}: #{number_with_delimiter(total)} English learners" } }
+        %span.trend-fill{ style: "height: #{(100.0 * total / max).round(1)}%" }
+        %span.trend-year= "'#{format('%02d', year % 100)}"
+  %h3.school-language-heading
+    Schools with the most
+    = @language.name
+    speakers in
+    %span#school-language-table-year= SchoolLanguage.school_year(@year)
+  %table.table.school-language-schools
+    %thead
+      %tr
+        %th School
+        %th District
+        %th.text-end English learners
+    %tbody#school-language-schools
+  .school-language-notes
+    %p
+      These are
+      %strong English learners
+      (students still learning English) whose home language is #{@language.name}, not every student who speaks it.
+      Students who are fluent in English aren't counted, so languages spoken mostly by recent immigrants show up more than long-established ones.
+    %p
+      Source:
+      = link_to('California Department of Education, English Learners by Grade & Language', 'https://www.cde.ca.gov/ds/ad/fileselsch.asp', target: '_blank', rel: 'noopener')
+      for public schools in Los Angeles, Orange, Ventura, Riverside, and San Bernardino counties.
+      CDE changed its language codes in 2023-24, so a few related languages are grouped together to keep years comparable.

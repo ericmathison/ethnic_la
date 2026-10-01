@@ -1,0 +1,14 @@
+white:
+  cds_code: '19645000000001'
+  name: R. D. White Elementary
+  district: Glendale Unified
+  county: Los Angeles
+  city: Glendale
+  latitude: 34.15
+  longitude: -118.25
+
+unmapped:
+  cds_code: '19645000000002'
+  name: Closed Elementary
+  district: Glendale Unified
+  county: Los Angeles

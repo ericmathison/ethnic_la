@@ -1,0 +1,23 @@
+white_armenian_2024:
+  school: white
+  school_language: armenian
+  year: 2024
+  english_learners: 40
+
+white_armenian_2025:
+  school: white
+  school_language: armenian
+  year: 2025
+  english_learners: 30
+
+unmapped_armenian_2025:
+  school: unmapped
+  school_language: armenian
+  year: 2025
+  english_learners: 5
+
+white_spanish_2025:
+  school: white
+  school_language: spanish
+  year: 2025
+  english_learners: 100
