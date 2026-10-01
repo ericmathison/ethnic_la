@@ -38,4 +38,16 @@ class SchoolLanguagesTest < ActionDispatch::IntegrationTest
     get school_language_path('klingon')
     assert_response :not_found
   end
+
+  test 'the menu links to the language map and marks it as the current page' do
+    get root_path
+    assert_select '#nav-language-map[href="/language-map"]', 'Language Map'
+    assert_select '#nav-language-map.active', count: 0
+
+    get school_language_path(school_languages(:armenian))
+    assert_equal '/language-map/armenian', path
+    assert_select '#nav-language-map.active[aria-current="page"]'
+    assert_select '#nav-religions', text: 'Religion'
+    assert_select '#nav-religions strong', count: 0
+  end
 end

@@ -14,8 +14,11 @@
         %ul.navbar-nav
           %li.nav-item.dropdown
             %a.nav-link.dropdown-toggle#nav-religions{ href: '#', role: 'button', data: { bs_toggle: 'dropdown' }, aria: { expanded: 'false' } }
-              Religion:
-              %strong= current_religion_label
+              - if current_religion_label
+                Religion:
+                %strong= current_religion_label
+              - else
+                Religion
             %ul.dropdown-menu{ aria: { labelledby: 'nav-religions' } }
               %li
                 = link_to(root_path, class: ['dropdown-item', ('active' if viewing_ethnic_churches?)], id: 'nav-christianity', aria: { current: ('page' if viewing_ethnic_churches?) }) do
@@ -33,6 +36,8 @@
               %li
                 %hr.dropdown-divider
               %li= link_to('All religions', religions_path, class: ['dropdown-item', ('active' if controller_name == 'religions' && action_name == 'index')])
+          %li.nav-item
+            = link_to('Language Map', school_languages_path, id: 'nav-language-map', class: ['nav-link', ('active' if viewing_language_map?)], aria: { current: ('page' if viewing_language_map?) })
     = link_to(root_path, class: 'logo-text') do
       %header
         = image_tag 'koreanbell.png', size: '300x164', class: 'logo-image'

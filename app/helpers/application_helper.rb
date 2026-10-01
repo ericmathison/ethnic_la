@@ -9,8 +9,14 @@ module ApplicationHelper
     controller_name.in?(%w[ethnic_churches languages])
   end
 
+  def viewing_language_map?
+    controller_name == 'school_languages'
+  end
+
+  # nil when the page isn't about a religion
   def current_religion_label
     return @religion.name if @religion
+    return if viewing_language_map?
     return 'All' if controller_name == 'religions'
 
     'Christianity'
