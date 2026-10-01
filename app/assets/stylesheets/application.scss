@@ -251,6 +251,26 @@ $languages: world-map, pattern, diamond-tiles, dingy-yellow-wall, stone-wall, ro
     color: #ffffff;
   }
 
+  // Each top-level item is its own section; underline the one being viewed
+  .nav-link {
+    border-bottom: 2px solid transparent;
+  }
+
+  .nav-link.active {
+    border-bottom-color: #f2ecd0;
+  }
+
+  .nav-icon {
+    margin: -2px 6px 0 0;
+    vertical-align: middle;
+  }
+
+  .nav-divider {
+    width: 1px;
+    margin: 8px 14px;
+    background: rgba(242, 236, 208, 0.35);
+  }
+
   .dropdown-menu {
     background: #f6f2e5;
     max-height: 70vh;

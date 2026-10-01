@@ -13,7 +13,8 @@
       .container-fluid.justify-content-center
         %ul.navbar-nav
           %li.nav-item.dropdown
-            %a.nav-link.dropdown-toggle#nav-religions{ href: '#', role: 'button', data: { bs_toggle: 'dropdown' }, aria: { expanded: 'false' } }
+            %a.nav-link.dropdown-toggle#nav-religions{ href: '#', role: 'button', class: ('active' if viewing_religions?), data: { bs_toggle: 'dropdown' }, aria: { expanded: 'false' } }
+              = nav_icon(:place_of_worship)
               - if current_religion_label
                 Religion:
                 %strong= current_religion_label
@@ -36,8 +37,11 @@
               %li
                 %hr.dropdown-divider
               %li= link_to('All religions', religions_path, class: ['dropdown-item', ('active' if controller_name == 'religions' && action_name == 'index')])
+          %li.nav-divider{ aria: { hidden: 'true' } }
           %li.nav-item
-            = link_to('Language Map', school_languages_path, id: 'nav-language-map', class: ['nav-link', ('active' if viewing_language_map?)], aria: { current: ('page' if viewing_language_map?) })
+            = link_to(school_languages_path, id: 'nav-language-map', class: ['nav-link', ('active' if viewing_language_map?)], aria: { current: ('page' if viewing_language_map?) }) do
+              = nav_icon(:map_pin)
+              Language Map
     = link_to(root_path, class: 'logo-text') do
       %header
         = image_tag 'koreanbell.png', size: '300x164', class: 'logo-image'

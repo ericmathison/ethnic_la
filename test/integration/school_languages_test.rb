@@ -43,11 +43,13 @@ class SchoolLanguagesTest < ActionDispatch::IntegrationTest
     get root_path
     assert_select '#nav-language-map[href="/language-map"]', 'Language Map'
     assert_select '#nav-language-map.active', count: 0
+    assert_select '#nav-religions.active'
 
     get school_language_path(school_languages(:armenian))
     assert_equal '/language-map/armenian', path
     assert_select '#nav-language-map.active[aria-current="page"]'
     assert_select '#nav-religions', text: 'Religion'
+    assert_select '#nav-religions.active', count: 0
     assert_select '#nav-religions strong', count: 0
   end
 end
