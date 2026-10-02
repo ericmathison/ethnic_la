@@ -1,0 +1,15 @@
+armenian:
+  name: Armenian
+  slug: armenian
+  census_code: '1117'
+  category: Middle East & North Africa
+  people: 250
+  people_by_county: { "Los Angeles": 230, "Orange": 20 }
+
+zapotec:
+  name: Zapotec
+  slug: zapotec
+  census_code: '3715'
+  category: Indigenous Americas
+  people: 40
+  people_by_county: { "Los Angeles": 40 }

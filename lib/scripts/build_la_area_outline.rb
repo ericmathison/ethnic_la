@@ -11,7 +11,7 @@ require 'json'
 SERVICE = 'https://services3.arcgis.com/uknczv4rpevve42E/arcgis/rest/services/' \
           'California_County_Boundaries_and_Identifiers_Blue_Version_view/FeatureServer/1/query'.freeze
 
-frame = LanguageFootprint
+frame = Footprint
 uri = URI(SERVICE)
 uri.query = URI.encode_www_form(
   where: '1=1', geometry: [frame::WEST, frame::SOUTH, frame::EAST, frame::NORTH].join(','),

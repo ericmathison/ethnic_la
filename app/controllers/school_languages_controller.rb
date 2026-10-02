@@ -24,6 +24,7 @@ class SchoolLanguagesController < ApplicationController
     details = LanguageFootprint.endonyms.fetch(@language.name, {})
     totals = @language.totals_by_year
     { name: @language.name, slug: @language.slug, endonym: details['endonym'], lang: details['lang'],
+      count_label: "#{@language.name}-speaking English learners",
       years: @years, totals: @years.map { totals.fetch(_1, 0) }, points: @language.map_points(@years) }
   end
   helper_method :language_data

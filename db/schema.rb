@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.1].define(version: 2026_10_01_200000) do
+ActiveRecord::Schema[8.1].define(version: 2026_10_02_200000) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_catalog.plpgsql"
 
@@ -43,6 +43,16 @@ ActiveRecord::Schema[8.1].define(version: 2026_10_01_200000) do
     t.index ["reset_password_token"], name: "index_admins_on_reset_password_token", unique: true
   end
 
+  create_table "census_tracts", force: :cascade do |t|
+    t.string "geoid", null: false
+    t.string "county", null: false
+    t.float "latitude", null: false
+    t.float "longitude", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["geoid"], name: "index_census_tracts_on_geoid", unique: true
+  end
+
   create_table "countries", force: :cascade do |t|
     t.string "name"
     t.datetime "created_at", precision: nil, null: false
@@ -63,6 +73,28 @@ ActiveRecord::Schema[8.1].define(version: 2026_10_01_200000) do
     t.boolean "unconfirmed"
     t.index ["country_id"], name: "index_ethnic_churches_on_country_id"
     t.index ["religious_background_id"], name: "index_ethnic_churches_on_religious_background_id"
+  end
+
+  create_table "ethnicities", force: :cascade do |t|
+    t.string "name", null: false
+    t.string "slug", null: false
+    t.string "census_code", null: false
+    t.string "category", null: false
+    t.integer "people", null: false
+    t.jsonb "people_by_county", default: {}, null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["census_code"], name: "index_ethnicities_on_census_code", unique: true
+    t.index ["slug"], name: "index_ethnicities_on_slug", unique: true
+  end
+
+  create_table "ethnicity_counts", force: :cascade do |t|
+    t.bigint "ethnicity_id", null: false
+    t.bigint "census_tract_id", null: false
+    t.integer "people", null: false
+    t.index ["census_tract_id"], name: "index_ethnicity_counts_on_census_tract_id"
+    t.index ["ethnicity_id", "census_tract_id"], name: "index_ethnicity_counts_on_ethnicity_id_and_census_tract_id", unique: true
+    t.index ["ethnicity_id"], name: "index_ethnicity_counts_on_ethnicity_id"
   end
 
   create_table "languages", force: :cascade do |t|
@@ -173,6 +205,8 @@ ActiveRecord::Schema[8.1].define(version: 2026_10_01_200000) do
   add_foreign_key "addresses", "ethnic_churches"
   add_foreign_key "ethnic_churches", "countries"
   add_foreign_key "ethnic_churches", "religious_backgrounds"
+  add_foreign_key "ethnicity_counts", "census_tracts"
+  add_foreign_key "ethnicity_counts", "ethnicities"
   add_foreign_key "notes", "ethnic_churches"
   add_foreign_key "religion_memberships", "religions"
   add_foreign_key "religion_memberships", "religious_centers"

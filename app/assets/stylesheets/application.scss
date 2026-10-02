@@ -254,6 +254,7 @@ $languages: world-map, pattern, diamond-tiles, dingy-yellow-wall, stone-wall, ro
   // Each top-level item is its own section; underline the one being viewed
   .nav-link {
     border-bottom: 2px solid transparent;
+    white-space: nowrap;
   }
 
   .nav-link.active {
@@ -267,7 +268,7 @@ $languages: world-map, pattern, diamond-tiles, dingy-yellow-wall, stone-wall, ro
 
   .nav-divider {
     width: 1px;
-    margin: 8px 14px;
+    margin: 8px 6px;
     background: rgba(242, 236, 208, 0.35);
   }
 
@@ -350,34 +351,34 @@ $languages: world-map, pattern, diamond-tiles, dingy-yellow-wall, stone-wall, ro
   color: #f2ecd0;
 }
 
-// Language map: cards for every language beside one big map that stays in view
-.language-map-page {
+// Language and ethnicity maps: cards for every group beside one big map that stays in view
+.community-map-page {
   max-width: 1400px;
   margin: 0 auto;
   padding: 0 16px;
 
-  .language-map-intro {
+  .community-map-intro {
     max-width: 720px;
   }
 
-  .language-map-layout {
+  .community-map-layout {
     display: grid;
     gap: 24px;
     margin-top: 16px;
   }
 
   @media (min-width: 992px) {
-    .language-map-layout {
+    .community-map-layout {
       grid-template-columns: minmax(330px, 2fr) minmax(0, 3fr);
       grid-template-areas: 'wall panel';
       align-items: start;
     }
 
-    .language-wall {
+    .footprint-wall {
       grid-area: wall;
     }
 
-    .language-panel {
+    .map-panel {
       grid-area: panel;
       position: sticky;
       top: 12px;
@@ -386,7 +387,7 @@ $languages: world-map, pattern, diamond-tiles, dingy-yellow-wall, stone-wall, ro
     }
   }
 
-  .language-panel {
+  .map-panel {
     transition: opacity 0.15s;
 
     &.loading {
@@ -400,7 +401,7 @@ $languages: world-map, pattern, diamond-tiles, dingy-yellow-wall, stone-wall, ro
     }
   }
 
-  .language-title {
+  .map-title {
     display: flex;
     flex-wrap: wrap;
     align-items: baseline;
@@ -410,17 +411,17 @@ $languages: world-map, pattern, diamond-tiles, dingy-yellow-wall, stone-wall, ro
     font-size: 32px;
   }
 
-  .language-title-endonym {
+  .map-title-endonym {
     font-family: var(--bs-body-font-family);
     font-size: 28px;
     font-weight: normal;
   }
 
-  .school-language-total {
+  .map-total {
     margin-bottom: 8px;
   }
 
-  .school-language-year {
+  .map-year {
     display: flex;
     align-items: center;
     gap: 12px;
@@ -435,7 +436,7 @@ $languages: world-map, pattern, diamond-tiles, dingy-yellow-wall, stone-wall, ro
     }
   }
 
-  .school-language-trend {
+  .map-trend {
     display: flex;
     align-items: flex-end;
     gap: 2px;
@@ -481,7 +482,7 @@ $languages: world-map, pattern, diamond-tiles, dingy-yellow-wall, stone-wall, ro
     }
   }
 
-  .top-schools summary {
+  .map-table summary {
     margin-bottom: 8px;
     cursor: pointer;
   }
@@ -496,6 +497,30 @@ $languages: world-map, pattern, diamond-tiles, dingy-yellow-wall, stone-wall, ro
     .form-control {
       flex: 1;
       min-width: 180px;
+    }
+  }
+
+  .category-filters {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+    margin-bottom: 14px;
+  }
+
+  .category-filter {
+    border: 1px solid rgba(73, 71, 63, 0.3);
+    border-radius: 999px;
+    background: #f6f2e5;
+    color: #49473f;
+
+    &:hover {
+      border-color: #2f6fd6;
+    }
+
+    &.active {
+      background: #49473f;
+      border-color: #49473f;
+      color: #f6f2e5;
     }
   }
 
@@ -589,7 +614,7 @@ $languages: world-map, pattern, diamond-tiles, dingy-yellow-wall, stone-wall, ro
     color: #6c757d;
   }
 
-  .school-language-notes {
+  .map-notes {
     max-width: 900px;
     font-size: 14px;
     color: #6c757d;

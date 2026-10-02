@@ -1,0 +1,11 @@
+glendale:
+  geoid: '06037301100'
+  county: Los Angeles
+  latitude: 34.15
+  longitude: -118.25
+
+oaxacan_koreatown:
+  geoid: '06037211900'
+  county: Los Angeles
+  latitude: 34.06
+  longitude: -118.29

@@ -2,18 +2,18 @@ require 'test_helper'
 
 class SchoolLanguagesTest < ActionDispatch::IntegrationTest
   def panel_data
-    JSON.parse(css_select('#language-panel').first['data-language'])
+    JSON.parse(css_select('#map-panel').first['data-group'])
   end
 
   test 'language page shows the latest year with every mapped school' do
     get school_language_path(school_languages(:armenian))
 
     assert_response :success
-    assert_select '#language-title-name', 'Armenian'
-    assert_select '#language-title-endonym[lang=hy]', 'Հայերեն'
-    assert_select '#school-language-total-count', '35'
-    assert_select '#school-language-year-label', '2025-26'
-    assert_equal '2025', css_select('#language-panel').first['data-year']
+    assert_select '.map-title .map-group-name', 'Armenian'
+    assert_select '#map-title-endonym[lang=hy]', 'Հայերեն'
+    assert_select '#map-total-count', '35'
+    assert_select '#map-year-label', '2025-26'
+    assert_equal '2025', css_select('#map-panel').first['data-year']
 
     data = panel_data
     assert_equal [2024, 2025], data['years']
@@ -24,8 +24,8 @@ class SchoolLanguagesTest < ActionDispatch::IntegrationTest
   test 'the year can be chosen' do
     get school_language_path(school_languages(:armenian), year: 2024)
 
-    assert_select '#school-language-total-count', '40'
-    assert_select '#school-language-year-label', '2024-25'
+    assert_select '#map-total-count', '40'
+    assert_select '#map-year-label', '2024-25'
     assert_select '.trend-bar.selected[data-index="0"]'
   end
 
@@ -48,6 +48,7 @@ class SchoolLanguagesTest < ActionDispatch::IntegrationTest
 
     data = response.parsed_body
     assert_equal %w[Spanish spanish Español es], data.values_at('name', 'slug', 'endonym', 'lang')
+    assert_equal 'Spanish-speaking English learners', data['count_label']
     assert_equal [0, 100], data['totals']
     assert_equal [[0, 100]], data['points'].map { _1['counts'] }
   end

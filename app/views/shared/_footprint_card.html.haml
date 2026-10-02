@@ -1,0 +1,11 @@
+= link_to(card[:href], class: 'footprint-card', title: card[:title], data: { slug: card[:slug], name: card[:name].downcase, endonym: card[:endonym].to_s.downcase, size: card[:size], category: card[:category] }) do
+  %svg.footprint-map{ viewBox: viewbox, aria: { hidden: 'true' } }
+    %use{ href: '#footprint-outline' }
+    %g.footprint-dots
+      - card[:dots].each do |dot|
+        %circle{ cx: dot.x, cy: dot.y, r: dot.r }
+  - if card[:endonym]
+    %span.footprint-endonym{ lang: card[:lang], dir: 'auto' }= card[:endonym]
+  %span.footprint-name= card[:name]
+  - if card[:note]
+    %span.footprint-count= card[:note]

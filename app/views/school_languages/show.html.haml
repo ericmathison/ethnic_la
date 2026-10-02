@@ -1,27 +1,27 @@
 - data = language_data
-%main.language-map-page
+%main.community-map-page
   %h2.mb-2 Los Angeles Area Languages
-  %p.language-map-intro
+  %p.community-map-intro
     Where English learners who speak each language go to school.
     Pick a language to see it on the big map, then use the slider to see how it has changed since 2011.
-  .language-map-layout
-    %section.language-panel#language-panel{ aria: { label: 'Selected language' }, data: { language: data.to_json, year: @year } }
-      %h3.language-title
-        %span.language-title-endonym#language-title-endonym{ lang: data[:lang], dir: 'auto', hidden: data[:endonym].nil? }= data[:endonym]
-        %span#language-title-name= @language.name
-      %p.school-language-total
-        %strong#school-language-total-count= number_with_delimiter(data[:totals][@years.index(@year)])
+  .community-map-layout
+    %section.map-panel#map-panel{ aria: { label: 'Selected language' }, data: { group: data.to_json, year: @year, base_path: school_languages_path } }
+      %h3.map-title
+        %span.map-title-endonym#map-title-endonym{ lang: data[:lang], dir: 'auto', hidden: data[:endonym].nil? }= data[:endonym]
+        %span.map-group-name= @language.name
+      %p.map-total
+        %strong#map-total-count= number_with_delimiter(data[:totals][@years.index(@year)])
         English learners spoke
-        %span#school-language-total-name= @language.name
+        %span.map-group-name= @language.name
         at home in
-        %span#school-language-total-year= SchoolLanguage.school_year(@year)
-      .school-language-year
-        %label.form-label.visually-hidden{ for: 'school-language-year' } School year
-        %button.btn.btn-sm.btn-outline-secondary#school-language-play{ type: 'button' } Play
-        %input.form-range#school-language-year{ type: 'range', min: 0, max: @years.size - 1, step: 1, value: @years.index(@year), aria: { valuetext: SchoolLanguage.school_year(@year) } }
-        %strong#school-language-year-label= SchoolLanguage.school_year(@year)
-      .school-language-map
-      .school-language-trend#school-language-trend{ role: 'list', aria: { label: 'English learners by school year' } }
+        %span#map-total-year= SchoolLanguage.school_year(@year)
+      .map-year
+        %label.form-label.visually-hidden{ for: 'map-year' } School year
+        %button.btn.btn-sm.btn-outline-secondary#map-play{ type: 'button' } Play
+        %input.form-range#map-year{ type: 'range', min: 0, max: @years.size - 1, step: 1, value: @years.index(@year), aria: { valuetext: SchoolLanguage.school_year(@year) } }
+        %strong#map-year-label= SchoolLanguage.school_year(@year)
+      .big-map
+      .map-trend#map-trend{ role: 'list', aria: { label: 'English learners by school year' } }
         - max = [data[:totals].max.to_i, 1].max
         - @years.each_with_index do |year, index|
           - total = data[:totals][index]
@@ -30,26 +30,20 @@
                              aria: { label: "#{SchoolLanguage.school_year(year)}: #{number_with_delimiter(total)} English learners" } }
             %span.trend-fill{ style: "height: #{(100.0 * total / max).round(1)}%" }
             %span.trend-year= "'#{format('%02d', year % 100)}"
-      %details.top-schools
+      %details.map-table
         %summary
           Schools with the most English learners who speak
-          %span#school-language-table-name= @language.name
-        %table.table.table-sm.school-language-schools
+          %span.map-group-name= @language.name
+        %table.table.table-sm
           %thead
             %tr
               %th School
               %th District
               %th.text-end Students
-          %tbody#school-language-schools
-    %section.language-wall{ aria: { label: 'Languages' } }
-      .browse-controls
-        %input.form-control#language-search{ type: 'search', placeholder: 'Find a language', aria: { label: 'Find a language' } }
-        .btn-group{ role: 'group', aria: { label: 'Sort languages' } }
-          %button.btn.btn-sm.btn-outline-secondary.active{ type: 'button', data: { sort: 'size' }, aria: { pressed: 'true' } } Largest
-          %button.btn.btn-sm.btn-outline-secondary{ type: 'button', data: { sort: 'name' }, aria: { pressed: 'false' } } A–Z
-      %p.browse-empty#language-search-empty{ hidden: true } No language matches.
+          %tbody#map-table-body
+    %section.footprint-wall{ aria: { label: 'Languages' } }
       = render 'footprints'
-  .school-language-notes
+  .map-notes
     %p
       These are
       %strong English learners,

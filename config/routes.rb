@@ -13,4 +13,5 @@ Rails.application.routes.draw do
   resources :ethnic_churches
   resources :religions, only: %i[index show]
   resources :school_languages, path: 'language-map', only: %i[index show]
+  resources :ethnicities, path: 'ethnicity-map', only: %i[index show]
 end

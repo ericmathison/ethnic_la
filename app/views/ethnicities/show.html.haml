@@ -1,0 +1,48 @@
+- data = ethnicity_data
+%main.community-map-page
+  %h2.mb-2 Los Angeles Area Ethnic Groups
+  %p.community-map-intro
+    Where people of each ethnic group live, from the 2020 Census.
+    Pick a group to see it on the big map, or filter by region of origin.
+  .community-map-layout
+    %section.map-panel#map-panel{ aria: { label: 'Selected group' }, data: { group: data.to_json, year: 2020, base_path: ethnicities_path, heat_intensity: 0.6 } }
+      %h3.map-title
+        %span.map-group-name= @ethnicity.name
+      %p.map-total
+        %strong#map-total-count= number_with_delimiter(@ethnicity.people)
+        people in the Los Angeles area identified as
+        %span.map-group-name= @ethnicity.name
+        in the 2020 Census
+      .big-map
+      %details.map-table{ open: true }
+        %summary
+          By county
+        %table.table.table-sm
+          %thead
+            %tr
+              %th County
+              %th.text-end People
+          %tbody#map-table-body
+    %section.footprint-wall{ aria: { label: 'Ethnic groups' } }
+      -# Cached until the data or outline change. The selected card is marked by JavaScript.
+      - cache ['ethnicity-footprints', EthnicityCount.count, EthnicityCount.maximum(:id), File.mtime(Rails.root.join('config/la_area_outline.json')).to_i] do
+        = render 'shared/footprint_wall', cards: ethnicity_cards, categories: Ethnicity::CATEGORIES & Ethnicity.distinct.pluck(:category),
+                 key_text: 'Blue dots are the census tracts where a group lives; bigger dots mean more people.'
+  .map-notes
+    %p
+      People could identify with more than one group, and each group counts everyone who listed it,
+      so the groups add up to more than the area's population.
+      Hispanic or Latino origin (for example Mexican or Salvadoran) is a separate question from race,
+      so someone can appear in both a Latin American group and another group, such as Aztec or Maya.
+    %p
+      To protect privacy, the Census Bureau only reports a group in a census tract where at least 22 people belong to it,
+      and adds small random changes to every count.
+      Totals are for each county, so they include people in tracts too small to be shown on the map.
+      Broad groups like "European" or "East Asian" are left out in favor of the specific groups within them.
+    %p
+      Source:
+      = link_to('U.S. Census Bureau, 2020 Census Detailed Demographic and Housing Characteristics File A', 'https://www.census.gov/data/tables/2023/dec/2020-census-detailed-dhc-a.html', target: '_blank', rel: 'noopener')
+      for Los Angeles, Orange, Ventura, Riverside, and San Bernardino counties.
+      County outlines from the
+      = succeed('.') do
+        = link_to('California Department of Technology', 'https://gis.data.ca.gov/datasets/CDT::california-county-boundaries-and-identifiers', target: '_blank', rel: 'noopener')

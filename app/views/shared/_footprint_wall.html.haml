@@ -1,0 +1,35 @@
+-# Cards with small maps for every group on a map page (language or ethnicity),
+-# with search, sorting, and optional category filters. Locals:
+-#   cards: [{ href:, slug:, name:, endonym:, lang:, size:, title:, note:, category:, dots: }], largest first
+-#   key_text: what the blue dots show
+-#   categories: category names to filter by (optional)
+- viewbox = "0 0 #{Footprint::WIDTH} #{Footprint::HEIGHT}"
+- categories = local_assigns.fetch(:categories, [])
+.browse-controls
+  %input.form-control#footprint-search{ type: 'search', placeholder: 'Search', aria: { label: 'Search' } }
+  .btn-group{ role: 'group', aria: { label: 'Sort' } }
+    %button.btn.btn-sm.btn-outline-secondary.active{ type: 'button', data: { sort: 'size' }, aria: { pressed: 'true' } } Largest
+    %button.btn.btn-sm.btn-outline-secondary{ type: 'button', data: { sort: 'name' }, aria: { pressed: 'false' } } A–Z
+- if categories.any?
+  .category-filters{ role: 'group', aria: { label: 'Filter by region' } }
+    %button.btn.btn-sm.category-filter.active{ type: 'button', data: { category: '' }, aria: { pressed: 'true' } } All
+    - categories.each do |category|
+      %button.btn.btn-sm.category-filter{ type: 'button', data: { category: category }, aria: { pressed: 'false' } }= category
+%p.browse-empty#footprint-search-empty{ hidden: true } Nothing matches.
+-# Colors are attributes, since page styles don't reach inside <use> copies
+%svg.footprint-defs{ aria: { hidden: 'true' }, width: 0, height: 0 }
+  %symbol#footprint-outline{ viewBox: viewbox }
+    %rect{ width: Footprint::WIDTH, height: Footprint::HEIGHT, fill: '#dbe7ef' }
+    - Footprint.outline.each do |county|
+      %path{ d: county['path'], fill: '#ebe5d0', stroke: '#b9b19a', 'stroke-width': 0.4, 'stroke-linejoin': 'round' }
+.footprint-grid
+  .footprint-key
+    %svg.footprint-map{ viewBox: viewbox, role: 'img', aria: { label: 'Map of the area each small map covers, from Oxnard to Palm Springs' } }
+      %use{ href: '#footprint-outline' }
+      - Footprint.landmarks.each do |name, x, y, anchor|
+        %circle.landmark-dot{ cx: x, cy: y, r: 1.4 }
+        %text.landmark-label{ x: anchor == 'end' ? x - 2.5 : x + 2.5, y: y + 2.2, 'text-anchor': anchor }= name
+    %p
+      %strong How to read the small maps:
+      = "each shows the same area, from Oxnard to Palm Springs. #{key_text}"
+  = render partial: 'shared/footprint_card', collection: cards, as: :card, locals: { viewbox: viewbox }

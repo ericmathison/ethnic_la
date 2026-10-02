@@ -41,7 +41,13 @@
           %li.nav-item
             = link_to(school_languages_path, id: 'nav-language-map', class: ['nav-link', ('active' if viewing_language_map?)], aria: { current: ('page' if viewing_language_map?) }) do
               = nav_icon(:map_pin)
-              Language Map
+              Language
+              %span.d-none.d-sm-inline Map
+          %li.nav-item
+            = link_to(ethnicities_path, id: 'nav-ethnicity-map', class: ['nav-link', ('active' if viewing_ethnicity_map?)], aria: { current: ('page' if viewing_ethnicity_map?) }) do
+              = nav_icon(:people)
+              Ethnicity
+              %span.d-none.d-sm-inline Map
     = link_to(root_path, class: 'logo-text') do
       %header
         = image_tag 'koreanbell.png', size: '300x164', class: 'logo-image'

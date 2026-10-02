@@ -13,6 +13,10 @@ module ApplicationHelper
     controller_name == 'school_languages'
   end
 
+  def viewing_ethnicity_map?
+    controller_name == 'ethnicities'
+  end
+
   # The home page, church language pages, and religion pages
   def viewing_religions?
     viewing_ethnic_churches? || controller_name == 'religions'
@@ -21,7 +25,9 @@ module ApplicationHelper
   NAV_ICONS = {
     # A building with a peaked roof and an arched door
     place_of_worship: '<path d="M3 21V10l9-6 9 6v11z"/><path d="M10 21v-4a2 2 0 0 1 4 0v4"/><path d="M12 1v3"/>',
-    map_pin: '<path d="M12 21s-7-6.3-7-12a7 7 0 0 1 14 0c0 5.7-7 12-7 12z"/><circle cx="12" cy="9" r="2.5"/>'
+    map_pin: '<path d="M12 21s-7-6.3-7-12a7 7 0 0 1 14 0c0 5.7-7 12-7 12z"/><circle cx="12" cy="9" r="2.5"/>',
+    # Two people
+    people: '<circle cx="9" cy="8" r="3.5"/><path d="M2.5 20a6.5 6.5 0 0 1 13 0"/><path d="M16 4.6a3.5 3.5 0 0 1 0 6.8"/><path d="M18 14a6.5 6.5 0 0 1 3.5 6"/>'
   }.freeze
 
   def nav_icon(name)
@@ -32,7 +38,7 @@ module ApplicationHelper
   # nil when the page isn't about a religion
   def current_religion_label
     return @religion.name if @religion
-    return if viewing_language_map?
+    return if viewing_language_map? || viewing_ethnicity_map?
     return 'All' if controller_name == 'religions'
 
     'Christianity'

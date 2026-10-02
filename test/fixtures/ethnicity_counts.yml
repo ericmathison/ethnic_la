@@ -1,0 +1,9 @@
+armenian_glendale:
+  ethnicity: armenian
+  census_tract: glendale
+  people: 200
+
+zapotec_koreatown:
+  ethnicity: zapotec
+  census_tract: oaxacan_koreatown
+  people: 35
