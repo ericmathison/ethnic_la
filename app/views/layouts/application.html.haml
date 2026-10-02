@@ -43,6 +43,7 @@
               = nav_icon(:map_pin)
               Language
               %span.d-none.d-sm-inline Map
+          %li.nav-divider{ aria: { hidden: 'true' } }
           %li.nav-item
             = link_to(ethnicities_path, id: 'nav-ethnicity-map', class: ['nav-link', ('active' if viewing_ethnicity_map?)], aria: { current: ('page' if viewing_ethnicity_map?) }) do
               = nav_icon(:people)
