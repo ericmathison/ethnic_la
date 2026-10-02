@@ -1,0 +1,22 @@
+-# Cached until the data, native names, or outline change. The selected card is marked by JavaScript.
+- cache ['language-footprints', SchoolLanguageCount.count, SchoolLanguageCount.maximum(:id),
+         *%w[school_language_endonyms.yml la_area_outline.json].map { File.mtime(Rails.root.join('config', _1)).to_i }] do
+  - latest_year = SchoolLanguage.years.last
+  - viewbox = "0 0 #{LanguageFootprint::WIDTH} #{LanguageFootprint::HEIGHT}"
+  %svg.footprint-defs{ aria: { hidden: 'true' }, width: 0, height: 0 }
+    -# Colors are attributes, since page styles don't reach inside <use> copies
+    %symbol#footprint-outline{ viewBox: viewbox }
+      %rect{ width: LanguageFootprint::WIDTH, height: LanguageFootprint::HEIGHT, fill: '#dbe7ef' }
+      - LanguageFootprint.outline.each do |county|
+        %path{ d: county['path'], fill: '#ebe5d0', stroke: '#b9b19a', 'stroke-width': 0.4, 'stroke-linejoin': 'round' }
+  .footprint-grid
+    .footprint-key
+      %svg.footprint-map{ viewBox: viewbox, role: 'img', aria: { label: 'Map of the area each small map covers, from Oxnard to Palm Springs' } }
+        %use{ href: '#footprint-outline' }
+        - LanguageFootprint.landmarks.each do |name, x, y, anchor|
+          %circle.landmark-dot{ cx: x, cy: y, r: 1.4 }
+          %text.landmark-label{ x: anchor == 'end' ? x - 2.5 : x + 2.5, y: y + 2.2, 'text-anchor': anchor }= name
+      %p
+        %strong How to read the small maps:
+        each shows the same area, from Oxnard to Palm Springs. Blue dots are where a language's English learners go to school; bigger dots mean more students.
+    = render partial: 'footprint', collection: LanguageFootprint.all, locals: { latest_year: latest_year, viewbox: viewbox }

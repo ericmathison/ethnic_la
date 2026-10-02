@@ -1,7 +1,7 @@
 - language = footprint.language
-= link_to(school_language_path(language, year: footprint.year), class: 'footprint-card', data: { name: language.name.downcase, endonym: footprint.endonym.to_s.downcase, size: footprint.english_learners }) do
-  %svg.footprint-map{ viewBox: "0 0 #{LanguageFootprint::WIDTH} #{LanguageFootprint::HEIGHT}", aria: { hidden: 'true' } }
-    %use{ href: '#footprint-base', class: 'footprint-base' }
+= link_to(school_language_path(language), class: 'footprint-card', data: { slug: language.slug, name: language.name.downcase, endonym: footprint.endonym.to_s.downcase, size: footprint.english_learners }) do
+  %svg.footprint-map{ viewBox: viewbox, aria: { hidden: 'true' } }
+    %use{ href: '#footprint-outline' }
     %g.footprint-dots
       - footprint.dots.each do |dot|
         %circle{ cx: dot.x, cy: dot.y, r: dot.r }
@@ -10,5 +10,5 @@
   %span.footprint-name= language.name
   %span.footprint-count
     = number_with_delimiter(footprint.english_learners)
-    - unless footprint.year == @latest_year
+    - unless footprint.year == latest_year
       = "in #{SchoolLanguage.school_year(footprint.year)}"

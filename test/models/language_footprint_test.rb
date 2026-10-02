@@ -20,4 +20,11 @@ class LanguageFootprintTest < ActiveSupport::TestCase
   test 'schools outside the frame are left off the map' do
     assert_empty LanguageFootprint.dots_for([[10, 35.5, -118.0], [10, 34.0, -114.6]])
   end
+
+  test 'the outline and landmarks are drawn in the frame' do
+    assert_includes LanguageFootprint.outline.map { _1['name'] }, 'Los Angeles'
+    LanguageFootprint.landmarks.each do |name, x, y, _anchor|
+      assert x.between?(0, LanguageFootprint::WIDTH) && y.between?(0, LanguageFootprint::HEIGHT), "#{name} is outside the frame"
+    end
+  end
 end

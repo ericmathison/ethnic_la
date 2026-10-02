@@ -1,22 +1,30 @@
 class SchoolLanguagesController < ApplicationController
   DEFAULT_LANGUAGE = 'arabic'.freeze
-  # Languages with fewer English learners than this are under "smaller languages" on the browse page
-  BROWSE_MINIMUM = 20
 
   def index
     redirect_to school_language_path(params[:language].presence || DEFAULT_LANGUAGE, year: params[:year].presence)
   end
 
-  # Every language as a card with a small dot map of where its speakers are
-  def browse
-    @latest_year = SchoolLanguage.years.last
-  end
-
+  # The page lists every language as a card beside one big map. Picking a
+  # card loads that language's JSON and swaps the map in place.
   def show
     @years = SchoolLanguage.years
     @year = params[:year].to_i.in?(@years) ? params[:year].to_i : @years.last
     @language = SchoolLanguage.find_by!(slug: params[:id])
-    @languages = SchoolLanguage.with_totals(@years.last)
-    @totals = @language.totals_by_year
+
+    respond_to do |format|
+      format.html
+      format.json { render json: language_data }
+    end
   end
+
+  private
+
+  def language_data
+    details = LanguageFootprint.endonyms.fetch(@language.name, {})
+    totals = @language.totals_by_year
+    { name: @language.name, slug: @language.slug, endonym: details['endonym'], lang: details['lang'],
+      years: @years, totals: @years.map { totals.fetch(_1, 0) }, points: @language.map_points(@years) }
+  end
+  helper_method :language_data
 end

@@ -1,53 +1,65 @@
-%main.school-languages
-  %h2.mb-4= "#{@language.name} - Los Angeles Area English Learners"
-  = form_with(url: school_languages_path, method: :get, class: 'school-language-controls', id: 'school-language-form', local: true) do |form|
-    = form.label :language, 'Language', class: 'form-label', for: 'school-language-select'
-    = form.select :language, options_for_select(@languages.map { |language, total| ["#{language.name} (#{number_with_delimiter(total)})", language.slug] }, @language.slug), {}, class: 'form-select', id: 'school-language-select'
-    = form.hidden_field :year, value: @year, id: 'school-language-year-field'
-    %noscript= form.submit 'Show', class: 'btn btn-secondary'
-  = link_to('Browse all languages', browse_school_languages_path, class: 'browse-link')
-  .school-language-year
-    %label.form-label{ for: 'school-language-year' }
-      School year:
-      %strong#school-language-year-label= SchoolLanguage.school_year(@year)
-    .d-flex.align-items-center
-      %button.btn.btn-sm.btn-outline-secondary#school-language-play{ type: 'button' } Play
-      %input.form-range#school-language-year{ type: 'range', min: 0, max: @years.size - 1, step: 1, value: @years.index(@year) }
-  %p.school-language-total#school-language-total
-    %strong#school-language-total-count= number_with_delimiter(@totals.fetch(@year, 0))
-    = "English learners in Los Angeles area public schools spoke #{@language.name} at home in"
-    %span#school-language-total-year= SchoolLanguage.school_year(@year)
-  .school-language-map{ data: { points: @language.map_points(@years).to_json, years: @years.to_json, year: @year, language: @language.name } }
-  %h3.school-language-heading English learners by school year
-  .school-language-trend{ role: 'list' }
-    - max = [@totals.values.max.to_i, 1].max
-    - @years.each_with_index do |year, index|
-      - total = @totals.fetch(year, 0)
-      %button.trend-bar{ type: 'button', role: 'listitem', class: ('selected' if year == @year), data: { index: index },
-                         title: "#{SchoolLanguage.school_year(year)}: #{number_with_delimiter(total)}",
-                         aria: { label: "#{SchoolLanguage.school_year(year)}: #{number_with_delimiter(total)} English learners" } }
-        %span.trend-fill{ style: "height: #{(100.0 * total / max).round(1)}%" }
-        %span.trend-year= "'#{format('%02d', year % 100)}"
-  %h3.school-language-heading
-    Schools with the most
-    = @language.name
-    speakers in
-    %span#school-language-table-year= SchoolLanguage.school_year(@year)
-  %table.table.school-language-schools
-    %thead
-      %tr
-        %th School
-        %th District
-        %th.text-end English learners
-    %tbody#school-language-schools
+- data = language_data
+%main.language-map-page
+  %h2.mb-2 Los Angeles Area Languages
+  %p.language-map-intro
+    Where English learners who speak each language go to school.
+    Pick a language to see it on the big map, then use the slider to see how it has changed since 2011.
+  .language-map-layout
+    %section.language-panel#language-panel{ aria: { label: 'Selected language' }, data: { language: data.to_json, year: @year } }
+      %h3.language-title
+        %span.language-title-endonym#language-title-endonym{ lang: data[:lang], dir: 'auto', hidden: data[:endonym].nil? }= data[:endonym]
+        %span#language-title-name= @language.name
+      %p.school-language-total
+        %strong#school-language-total-count= number_with_delimiter(data[:totals][@years.index(@year)])
+        English learners spoke
+        %span#school-language-total-name= @language.name
+        at home in
+        %span#school-language-total-year= SchoolLanguage.school_year(@year)
+      .school-language-year
+        %label.form-label.visually-hidden{ for: 'school-language-year' } School year
+        %button.btn.btn-sm.btn-outline-secondary#school-language-play{ type: 'button' } Play
+        %input.form-range#school-language-year{ type: 'range', min: 0, max: @years.size - 1, step: 1, value: @years.index(@year), aria: { valuetext: SchoolLanguage.school_year(@year) } }
+        %strong#school-language-year-label= SchoolLanguage.school_year(@year)
+      .school-language-map
+      .school-language-trend#school-language-trend{ role: 'list', aria: { label: 'English learners by school year' } }
+        - max = [data[:totals].max.to_i, 1].max
+        - @years.each_with_index do |year, index|
+          - total = data[:totals][index]
+          %button.trend-bar{ type: 'button', role: 'listitem', class: ('selected' if year == @year), data: { index: index },
+                             title: "#{SchoolLanguage.school_year(year)}: #{number_with_delimiter(total)}",
+                             aria: { label: "#{SchoolLanguage.school_year(year)}: #{number_with_delimiter(total)} English learners" } }
+            %span.trend-fill{ style: "height: #{(100.0 * total / max).round(1)}%" }
+            %span.trend-year= "'#{format('%02d', year % 100)}"
+      %details.top-schools
+        %summary
+          Schools with the most English learners who speak
+          %span#school-language-table-name= @language.name
+        %table.table.table-sm.school-language-schools
+          %thead
+            %tr
+              %th School
+              %th District
+              %th.text-end Students
+          %tbody#school-language-schools
+    %section.language-wall{ aria: { label: 'Languages' } }
+      .browse-controls
+        %input.form-control#language-search{ type: 'search', placeholder: 'Find a language', aria: { label: 'Find a language' } }
+        .btn-group{ role: 'group', aria: { label: 'Sort languages' } }
+          %button.btn.btn-sm.btn-outline-secondary.active{ type: 'button', data: { sort: 'name' }, aria: { pressed: 'true' } } A–Z
+          %button.btn.btn-sm.btn-outline-secondary{ type: 'button', data: { sort: 'size' }, aria: { pressed: 'false' } } Largest
+      %p.browse-empty#language-search-empty{ hidden: true } No language matches.
+      = render 'footprints'
   .school-language-notes
     %p
       These are
-      %strong English learners
-      (students still learning English) whose home language is #{@language.name}, not every student who speaks it.
+      %strong English learners,
+      students still learning English, so they aren't everyone who speaks a language.
       Students who are fluent in English aren't counted, so languages spoken mostly by recent immigrants show up more than long-established ones.
     %p
       Source:
       = link_to('California Department of Education, English Learners by Grade & Language', 'https://www.cde.ca.gov/ds/ad/fileselsch.asp', target: '_blank', rel: 'noopener')
       for public schools in Los Angeles, Orange, Ventura, Riverside, and San Bernardino counties.
       CDE changed its language codes in 2023-24, so a few related languages are grouped together to keep years comparable.
+      County outlines from the
+      = succeed('.') do
+        = link_to('California Department of Technology', 'https://gis.data.ca.gov/datasets/CDT::california-county-boundaries-and-identifiers', target: '_blank', rel: 'noopener')

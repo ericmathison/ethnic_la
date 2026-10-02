@@ -1,32 +1,58 @@
 require 'test_helper'
 
 class SchoolLanguagesTest < ActionDispatch::IntegrationTest
+  def panel_data
+    JSON.parse(css_select('#language-panel').first['data-language'])
+  end
+
   test 'language page shows the latest year with every mapped school' do
     get school_language_path(school_languages(:armenian))
 
     assert_response :success
-    assert_select 'h2', 'Armenian - Los Angeles Area English Learners'
+    assert_select '#language-title-name', 'Armenian'
+    assert_select '#language-title-endonym[lang=hy]', 'Հայերեն'
     assert_select '#school-language-total-count', '35'
     assert_select '#school-language-year-label', '2025-26'
-    assert_select '#school-language-select option[selected]', 'Armenian (35)'
+    assert_equal '2025', css_select('#language-panel').first['data-year']
 
-    map = css_select('.school-language-map').first
-    assert_equal [2024, 2025], JSON.parse(map['data-years'])
-    assert_equal '2025', map['data-year']
-    points = JSON.parse(map['data-points'])
-    assert_equal [['R. D. White Elementary', [40, 30]]], points.map { [_1['name'], _1['counts']] }
+    data = panel_data
+    assert_equal [2024, 2025], data['years']
+    assert_equal [40, 35], data['totals']
+    assert_equal [['R. D. White Elementary', [40, 30]]], data['points'].map { [_1['name'], _1['counts']] }
   end
 
-  test 'languages are listed alphabetically and the year can be chosen' do
+  test 'the year can be chosen' do
     get school_language_path(school_languages(:armenian), year: 2024)
 
     assert_select '#school-language-total-count', '40'
     assert_select '#school-language-year-label', '2024-25'
-    assert_equal ['Armenian (35)', 'Spanish (100)'], css_select('#school-language-select option').map(&:text)
     assert_select '.trend-bar.selected[data-index="0"]'
   end
 
-  test 'the language picker redirects to the chosen language, keeping the year' do
+  test 'every language gets a card, alphabetically, after the key that explains them' do
+    school_language_counts(:white_spanish_2025).update!(english_learners: 1)
+    get school_language_path(school_languages(:armenian))
+
+    assert_select '.footprint-grid > :first-child.footprint-key'
+    assert_equal %w[Armenian Spanish], css_select('.footprint-card .footprint-name').map(&:text)
+    assert_select ".footprint-card[href='#{school_language_path('armenian')}'][data-slug=armenian]" do
+      assert_select '.footprint-endonym[lang=hy]', 'Հայերեն'
+      assert_select '.footprint-count', /35/
+      assert_select '.footprint-dots circle', 1
+    end
+    assert_select '#footprint-outline path', minimum: 5
+  end
+
+  test 'language JSON has what the page needs to switch languages in place' do
+    get school_language_path(school_languages(:spanish), format: :json)
+
+    data = response.parsed_body
+    assert_equal %w[Spanish spanish Español es], data.values_at('name', 'slug', 'endonym', 'lang')
+    assert_equal [0, 100], data['totals']
+    assert_equal [[0, 100]], data['points'].map { _1['counts'] }
+  end
+
+  test 'the language map link redirects to a language, keeping the year' do
     get school_languages_path(language: 'spanish', year: 2024)
     assert_redirected_to school_language_path('spanish', year: 2024)
 
@@ -50,26 +76,5 @@ class SchoolLanguagesTest < ActionDispatch::IntegrationTest
     assert_select '#nav-language-map.active[aria-current="page"]'
     assert_select '#nav-religions', text: 'Religion'
     assert_select '#nav-religions.active', count: 0
-    assert_select '#nav-religions strong', count: 0
-  end
-
-  test 'browse page shows a card per language linking to its map' do
-    school_language_counts(:white_spanish_2025).update!(english_learners: 5)
-    get browse_school_languages_path
-
-    assert_response :success
-    assert_select '.language-browse > .footprint-grid .footprint-card', 1
-    assert_select ".footprint-card[href='#{school_language_path('armenian', year: 2025)}']" do
-      assert_select '.footprint-endonym[lang=hy]', 'Հայերեն'
-      assert_select '.footprint-name', 'Armenian'
-      assert_select '.footprint-count', /35/
-      assert_select '.footprint-dots circle', 1
-    end
-    assert_select '#smaller-languages .footprint-card .footprint-name', 'Spanish'
-  end
-
-  test 'the map page links to the browse page' do
-    get school_language_path(school_languages(:armenian))
-    assert_select "a.browse-link[href='#{browse_school_languages_path}']"
   end
 end
