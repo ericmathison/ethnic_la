@@ -19,3 +19,4 @@
 //= require heatmap
 //= require community_map
 //= require footprint_wall
+//= require email_links

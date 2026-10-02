@@ -44,6 +44,10 @@
     %section.footprint-wall{ aria: { label: 'Languages' } }
       = render 'footprints'
   .map-notes
+    %p.map-contact
+      Know a language we're missing, or see something that looks wrong? Email
+      = succeed('.') do
+        = contact_email_link
     %p
       These are
       %strong English learners,

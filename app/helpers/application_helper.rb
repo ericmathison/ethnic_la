@@ -64,6 +64,18 @@ module ApplicationHelper
     end
   end
 
+  # A mailto link for the site's contact address that's put together by
+  # JavaScript (email_links.js), so the address never appears whole in the
+  # page's HTML (or this public repo) for spam harvesters to find. Without
+  # JavaScript it reads "contact at ethnicla dot com".
+  def contact_email_link(text = nil)
+    tag.a("#{CONTACT_EMAIL_USER} at #{CONTACT_EMAIL_DOMAIN.sub('.', ' dot ')}", class: 'email-link',
+          data: { user: CONTACT_EMAIL_USER, domain: CONTACT_EMAIL_DOMAIN.reverse, text: text })
+  end
+
+  CONTACT_EMAIL_USER = 'contact'.freeze
+  CONTACT_EMAIL_DOMAIN = 'ethnicla.com'.freeze
+
   # Only link to http(s) URLs; show them without the scheme.
   def website_link(url)
     return if url.blank?
