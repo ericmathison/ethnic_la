@@ -35,9 +35,9 @@ class SchoolLanguagesTest < ActionDispatch::IntegrationTest
     assert_select '.footprint-grid > :first-child.footprint-key'
     assert_equal %w[Spanish Armenian], css_select('.footprint-card .footprint-name').map(&:text)
     assert_select '[data-sort=size].active[aria-pressed=true]'
-    assert_select ".footprint-card[href='#{school_language_path('armenian')}'][data-slug=armenian]" do
+    assert_select ".footprint-card[href='#{school_language_path('armenian')}'][data-slug=armenian][title='Armenian: 35 English learners']" do
       assert_select '.footprint-endonym[lang=hy]', 'Հայերեն'
-      assert_select '.footprint-count', /35/
+      assert_select '.footprint-count', 0
       assert_select '.footprint-dots circle', 1
     end
     assert_select '#footprint-outline path', minimum: 5
