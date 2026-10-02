@@ -19,4 +19,4 @@
       %p
         %strong How to read the small maps:
         each shows the same area, from Oxnard to Palm Springs. Blue dots are where a language's English learners go to school; bigger dots mean more students.
-    = render partial: 'footprint', collection: LanguageFootprint.all, locals: { latest_year: latest_year, viewbox: viewbox }
+    = render partial: 'footprint', collection: LanguageFootprint.all.sort_by { [-_1.english_learners, _1.language.name] }, locals: { latest_year: latest_year, viewbox: viewbox }

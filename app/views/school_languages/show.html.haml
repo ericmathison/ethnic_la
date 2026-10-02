@@ -45,8 +45,8 @@
       .browse-controls
         %input.form-control#language-search{ type: 'search', placeholder: 'Find a language', aria: { label: 'Find a language' } }
         .btn-group{ role: 'group', aria: { label: 'Sort languages' } }
-          %button.btn.btn-sm.btn-outline-secondary.active{ type: 'button', data: { sort: 'name' }, aria: { pressed: 'true' } } A–Z
-          %button.btn.btn-sm.btn-outline-secondary{ type: 'button', data: { sort: 'size' }, aria: { pressed: 'false' } } Largest
+          %button.btn.btn-sm.btn-outline-secondary.active{ type: 'button', data: { sort: 'size' }, aria: { pressed: 'true' } } Largest
+          %button.btn.btn-sm.btn-outline-secondary{ type: 'button', data: { sort: 'name' }, aria: { pressed: 'false' } } A–Z
       %p.browse-empty#language-search-empty{ hidden: true } No language matches.
       = render 'footprints'
   .school-language-notes

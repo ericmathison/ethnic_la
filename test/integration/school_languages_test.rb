@@ -29,12 +29,12 @@ class SchoolLanguagesTest < ActionDispatch::IntegrationTest
     assert_select '.trend-bar.selected[data-index="0"]'
   end
 
-  test 'every language gets a card, alphabetically, after the key that explains them' do
-    school_language_counts(:white_spanish_2025).update!(english_learners: 1)
+  test 'every language gets a card, largest first, after the key that explains them' do
     get school_language_path(school_languages(:armenian))
 
     assert_select '.footprint-grid > :first-child.footprint-key'
-    assert_equal %w[Armenian Spanish], css_select('.footprint-card .footprint-name').map(&:text)
+    assert_equal %w[Spanish Armenian], css_select('.footprint-card .footprint-name').map(&:text)
+    assert_select '[data-sort=size].active[aria-pressed=true]'
     assert_select ".footprint-card[href='#{school_language_path('armenian')}'][data-slug=armenian]" do
       assert_select '.footprint-endonym[lang=hy]', 'Հայերեն'
       assert_select '.footprint-count', /35/
