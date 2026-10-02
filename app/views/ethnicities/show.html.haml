@@ -29,10 +29,6 @@
         = render 'shared/footprint_wall', cards: ethnicity_cards, categories: Ethnicity::CATEGORIES & Ethnicity.distinct.pluck(:category),
                  key_text: 'Blue dots are the census tracts where a group lives; bigger dots mean more people.'
   .map-notes
-    %p.map-contact
-      Know a community we're missing, or see something that looks wrong? Email
-      = succeed('.') do
-        = contact_email_link
     %p
       People could identify with more than one group, and each group counts everyone who listed it,
       so the groups add up to more than the area's population.
