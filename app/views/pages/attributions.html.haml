@@ -1,7 +1,53 @@
-.jumbotron.col-9
-  %h1.text-center Attributions
-  %h2 Language Image Credits:
+%main.attributions-page
+  %h2 Attributions
+  %p.attributions-intro
+    Ethnic LA is built on the work of photographers, mapmakers, and public agencies who share what they make.
+    Thank you to all of them.
 
-  - @attributions.each do |language, url|
-    %h3.title-with-emphasis= language
-    %p= link_to(url, url)
+  %section
+    %h3 Data and maps
+    .data-credits
+      .data-credit
+        %h4 Language Map
+        %p
+          = link_to('English Learners by Grade & Language', 'https://www.cde.ca.gov/ds/ad/fileselsch.asp', target: '_blank', rel: 'noopener')
+          from the California Department of Education, with school locations from
+          = succeed('.') do
+            = link_to('California Public Schools', 'https://gis.data.ca.gov/search?q=california%20public%20schools', target: '_blank', rel: 'noopener')
+      .data-credit
+        %h4 Ethnicity Map
+        %p
+          = link_to('2020 Census Detailed DHC-A', 'https://www.census.gov/data/tables/2023/dec/2020-census-detailed-dhc-a.html', target: '_blank', rel: 'noopener')
+          from the U.S. Census Bureau, with census tract locations from the
+          = succeed('.') do
+            = link_to('Census Gazetteer Files', 'https://www.census.gov/geographies/reference-files/time-series/geo/gazetteer-files.html', target: '_blank', rel: 'noopener')
+      .data-credit
+        %h4 Map outlines
+        %p
+          County and coastline outlines on the small maps from the California Department of Technology's
+          = succeed('.') do
+            = link_to('county boundaries', 'https://gis.data.ca.gov/datasets/CDT::california-county-boundaries-and-identifiers', target: '_blank', rel: 'noopener')
+      .data-credit
+        %h4 Base maps and addresses
+        %p
+          Map tiles by
+          = link_to('Mapbox', 'https://www.mapbox.com/about/maps/', target: '_blank', rel: 'noopener')
+          with data ©
+          = succeed('.') do
+            = link_to('OpenStreetMap contributors', 'https://www.openstreetmap.org/copyright', target: '_blank', rel: 'noopener')
+          Addresses located with the
+          = succeed('.') do
+            = link_to('U.S. Census Geocoder', 'https://geocoding.geo.census.gov/', target: '_blank', rel: 'noopener')
+
+  %section
+    %h3 Language photos
+    %p.section-intro The photos behind each language on the home page, and where they come from.
+    .photo-credits
+      - @photo_credits.each do |credit|
+        .photo-credit
+          = image_tag(credit[:image], alt: '', loading: 'lazy', class: 'photo-credit-image')
+          .photo-credit-text
+            %span.photo-credit-language= credit[:language]
+            = link_to(credit[:url], class: 'photo-credit-source', target: '_blank', rel: 'noopener', title: credit[:url]) do
+              = credit[:source]
+              %span{ aria: { hidden: 'true' } } ↗︎
