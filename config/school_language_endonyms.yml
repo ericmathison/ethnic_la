@@ -1,0 +1,91 @@
+# Each language's name for itself, shown on the language map's browse page.
+# Keys are SchoolLanguage names; lang is the BCP 47 code, so browsers pick a
+# font that has the script. Languages left out show their English name only.
+Albanian: { lang: sq, endonym: Shqip }
+Amharic: { lang: am, endonym: አማርኛ }
+Arabic: { lang: ar, endonym: العربية }
+Armenian: { lang: hy, endonym: Հայերեն }
+Assyrian: { lang: aii, endonym: ܣܘܪܝܬ }
+Azerbaijani: { lang: az, endonym: Azərbaycanca }
+Bengali: { lang: bn, endonym: বাংলা }
+Bulgarian: { lang: bg, endonym: Български }
+Burmese: { lang: my, endonym: မြန်မာဘာသာ }
+Cantonese: { lang: yue, endonym: 粵語 }
+Catalan: { lang: ca, endonym: Català }
+Cebuano: { lang: ceb, endonym: Binisaya }
+Chamorro: { lang: ch, endonym: "Finu' Chamoru" }
+Chaozhou (Teochew): { lang: nan, endonym: 潮州話 }
+Czech: { lang: cs, endonym: Čeština }
+Danish: { lang: da, endonym: Dansk }
+Dutch: { lang: nl, endonym: Nederlands }
+Fijian: { lang: fj, endonym: Na Vosa Vakaviti }
+Finnish: { lang: fi, endonym: Suomi }
+French: { lang: fr, endonym: Français }
+Georgian: { lang: ka, endonym: ქართული }
+German: { lang: de, endonym: Deutsch }
+Greek: { lang: el, endonym: Ελληνικά }
+Gujarati: { lang: gu, endonym: ગુજરાતી }
+Haitian Creole: { lang: ht, endonym: Kreyòl ayisyen }
+Hawaiian: { lang: haw, endonym: ʻŌlelo Hawaiʻi }
+Hebrew: { lang: he, endonym: עברית }
+Hindi: { lang: hi, endonym: हिन्दी }
+Hmong: { lang: hmn, endonym: Hmoob }
+Hungarian: { lang: hu, endonym: Magyar }
+Icelandic: { lang: is, endonym: Íslenska }
+Igbo: { lang: ig, endonym: Asụsụ Igbo }
+Ilocano: { lang: ilo, endonym: Ilokano }
+Indonesian: { lang: id, endonym: Bahasa Indonesia }
+Italian: { lang: it, endonym: Italiano }
+Japanese: { lang: ja, endonym: 日本語 }
+Kachin: { lang: kac, endonym: ကချင်ဘာသာ }
+Kannada: { lang: kn, endonym: ಕನ್ನಡ }
+Kazakh: { lang: kk, endonym: Қазақша }
+Khmer (Cambodian): { lang: km, endonym: ខ្មែរ }
+Kikuyu: { lang: ki, endonym: Gĩkũyũ }
+Kinyarwanda: { lang: rw, endonym: Ikinyarwanda }
+Korean: { lang: ko, endonym: 한국어 }
+Kurdish: { lang: ku, endonym: Kurdî }
+Kyrgyz: { lang: ky, endonym: Кыргызча }
+Lao: { lang: lo, endonym: ລາວ }
+Latvian: { lang: lv, endonym: Latviešu }
+Lithuanian: { lang: lt, endonym: Lietuvių }
+Malay: { lang: ms, endonym: Bahasa Melayu }
+Malayalam: { lang: ml, endonym: മലയാളം }
+Mandarin: { lang: zh, endonym: 普通話 }
+Marathi: { lang: mr, endonym: मराठी }
+Marshallese: { lang: mh, endonym: Kajin M̧ajeļ }
+Mixteco: { lang: mix, endonym: "Tu'un Sávi" }
+Mongolian: { lang: mn, endonym: Монгол }
+Navajo: { lang: nv, endonym: Diné bizaad }
+Nepali: { lang: ne, endonym: नेपाली }
+Norwegian: { lang: "no", endonym: Norsk }
+Oromo: { lang: om, endonym: Afaan Oromoo }
+Pashto: { lang: ps, endonym: پښتو }
+Persian (Farsi): { lang: fa, endonym: فارسی }
+Polish: { lang: pl, endonym: Polski }
+Portuguese: { lang: pt, endonym: Português }
+Punjabi: { lang: pa, endonym: ਪੰਜਾਬੀ }
+Romanian: { lang: ro, endonym: Română }
+Russian: { lang: ru, endonym: Русский }
+Samoan: { lang: sm, endonym: Gagana Sāmoa }
+Sinhala: { lang: si, endonym: සිංහල }
+Slovak: { lang: sk, endonym: Slovenčina }
+Somali: { lang: so, endonym: Soomaali }
+Spanish: { lang: es, endonym: Español }
+Swahili: { lang: sw, endonym: Kiswahili }
+Swedish: { lang: sv, endonym: Svenska }
+Taiwanese: { lang: nan, endonym: 台語 }
+Tajik: { lang: tg, endonym: Тоҷикӣ }
+Tamil: { lang: ta, endonym: தமிழ் }
+Telugu: { lang: te, endonym: తెలుగు }
+Thai: { lang: th, endonym: ไทย }
+Tibetan: { lang: bo, endonym: བོད་སྐད }
+Tigrinya: { lang: ti, endonym: ትግርኛ }
+Toishanese: { lang: yue, endonym: 台山話 }
+Tongan: { lang: to, endonym: Lea fakatonga }
+Turkish: { lang: tr, endonym: Türkçe }
+Ukrainian: { lang: uk, endonym: Українська }
+Urdu: { lang: ur, endonym: اردو }
+Uzbek: { lang: uz, endonym: Oʻzbekcha }
+Vietnamese: { lang: vi, endonym: Tiếng Việt }
+Yoruba: { lang: yo, endonym: Yorùbá }

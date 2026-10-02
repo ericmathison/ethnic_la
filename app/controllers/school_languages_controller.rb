@@ -1,8 +1,15 @@
 class SchoolLanguagesController < ApplicationController
   DEFAULT_LANGUAGE = 'arabic'.freeze
+  # Languages with fewer English learners than this are under "smaller languages" on the browse page
+  BROWSE_MINIMUM = 20
 
   def index
     redirect_to school_language_path(params[:language].presence || DEFAULT_LANGUAGE, year: params[:year].presence)
+  end
+
+  # Every language as a card with a small dot map of where its speakers are
+  def browse
+    @latest_year = SchoolLanguage.years.last
   end
 
   def show

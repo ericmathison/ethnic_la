@@ -52,4 +52,24 @@ class SchoolLanguagesTest < ActionDispatch::IntegrationTest
     assert_select '#nav-religions.active', count: 0
     assert_select '#nav-religions strong', count: 0
   end
+
+  test 'browse page shows a card per language linking to its map' do
+    school_language_counts(:white_spanish_2025).update!(english_learners: 5)
+    get browse_school_languages_path
+
+    assert_response :success
+    assert_select '.language-browse > .footprint-grid .footprint-card', 1
+    assert_select ".footprint-card[href='#{school_language_path('armenian', year: 2025)}']" do
+      assert_select '.footprint-endonym[lang=hy]', 'Հայերեն'
+      assert_select '.footprint-name', 'Armenian'
+      assert_select '.footprint-count', /35/
+      assert_select '.footprint-dots circle', 1
+    end
+    assert_select '#smaller-languages .footprint-card .footprint-name', 'Spanish'
+  end
+
+  test 'the map page links to the browse page' do
+    get school_language_path(school_languages(:armenian))
+    assert_select "a.browse-link[href='#{browse_school_languages_path}']"
+  end
 end

@@ -5,6 +5,7 @@
     = form.select :language, options_for_select(@languages.map { |language, total| ["#{language.name} (#{number_with_delimiter(total)})", language.slug] }, @language.slug), {}, class: 'form-select', id: 'school-language-select'
     = form.hidden_field :year, value: @year, id: 'school-language-year-field'
     %noscript= form.submit 'Show', class: 'btn btn-secondary'
+  = link_to('Browse all languages', browse_school_languages_path, class: 'browse-link')
   .school-language-year
     %label.form-label{ for: 'school-language-year' }
       School year:
