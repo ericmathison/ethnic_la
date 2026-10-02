@@ -15,11 +15,11 @@ class SchoolLanguage < ApplicationRecord
     "#{year}-#{format('%02d', (year + 1) % 100)}"
   end
 
-  # [[language, total English learners in year]], largest first. Includes
+  # [[language, total English learners in year]], alphabetically. Includes
   # languages with none that year, so every language can be picked.
-  def self.by_size(year)
+  def self.with_totals(year)
     totals = SchoolLanguageCount.where(year: year).group(:school_language_id).sum(:english_learners)
-    all.map { [_1, totals.fetch(_1.id, 0)] }.sort_by { |language, total| [-total, language.name] }
+    order(:name).map { [_1, totals.fetch(_1.id, 0)] }
   end
 
   def to_param

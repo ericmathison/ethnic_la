@@ -17,12 +17,12 @@ class SchoolLanguagesTest < ActionDispatch::IntegrationTest
     assert_equal [['R. D. White Elementary', [40, 30]]], points.map { [_1['name'], _1['counts']] }
   end
 
-  test 'languages are listed largest first and the year can be chosen' do
+  test 'languages are listed alphabetically and the year can be chosen' do
     get school_language_path(school_languages(:armenian), year: 2024)
 
     assert_select '#school-language-total-count', '40'
     assert_select '#school-language-year-label', '2024-25'
-    assert_equal ['Spanish (100)', 'Armenian (35)'], css_select('#school-language-select option').map(&:text)
+    assert_equal ['Armenian (35)', 'Spanish (100)'], css_select('#school-language-select option').map(&:text)
     assert_select '.trend-bar.selected[data-index="0"]'
   end
 
@@ -31,7 +31,7 @@ class SchoolLanguagesTest < ActionDispatch::IntegrationTest
     assert_redirected_to school_language_path('spanish', year: 2024)
 
     get school_languages_path
-    assert_redirected_to school_language_path('spanish')
+    assert_redirected_to school_language_path('arabic')
   end
 
   test 'unknown languages are not found' do

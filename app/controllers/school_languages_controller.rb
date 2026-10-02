@@ -1,5 +1,5 @@
 class SchoolLanguagesController < ApplicationController
-  DEFAULT_LANGUAGE = 'spanish'.freeze
+  DEFAULT_LANGUAGE = 'arabic'.freeze
 
   def index
     redirect_to school_language_path(params[:language].presence || DEFAULT_LANGUAGE, year: params[:year].presence)
@@ -9,7 +9,7 @@ class SchoolLanguagesController < ApplicationController
     @years = SchoolLanguage.years
     @year = params[:year].to_i.in?(@years) ? params[:year].to_i : @years.last
     @language = SchoolLanguage.find_by!(slug: params[:id])
-    @languages = SchoolLanguage.by_size(@years.last)
+    @languages = SchoolLanguage.with_totals(@years.last)
     @totals = @language.totals_by_year
   end
 end
