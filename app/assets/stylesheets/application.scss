@@ -494,9 +494,44 @@ $languages: world-map, pattern, diamond-tiles, dingy-yellow-wall, stone-wall, ro
     align-items: center;
     margin-bottom: 14px;
 
-    .form-control {
+    .footprint-search {
+      position: relative;
       flex: 1;
       min-width: 180px;
+    }
+
+    .form-control {
+      padding-right: 36px;
+
+      // Our own clear button replaces the browser's
+      &::-webkit-search-cancel-button {
+        -webkit-appearance: none;
+      }
+    }
+  }
+
+  .footprint-search-clear {
+    position: absolute;
+    top: 50%;
+    right: 6px;
+    width: 26px;
+    height: 26px;
+    transform: translateY(-50%);
+    padding: 0;
+    border: 0;
+    border-radius: 50%;
+    background: transparent;
+    color: #6c757d;
+    font-size: 20px;
+    line-height: 1;
+
+    &:hover, &:focus {
+      background: rgba(73, 71, 63, 0.12);
+      color: #49473f;
+    }
+
+    &[hidden] {
+      display: none;
     }
   }
 

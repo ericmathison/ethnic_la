@@ -4,6 +4,7 @@
   function setUp(wall) {
     var search = document.getElementById('footprint-search');
     var empty = document.getElementById('footprint-search-empty');
+    var clear = document.getElementById('footprint-search-clear');
     var key = wall.querySelector('.footprint-key');
     var cards = Array.prototype.slice.call(wall.querySelectorAll('.footprint-card'));
     var category = '';
@@ -19,6 +20,7 @@
         if (match) { matches++; }
       });
       empty.hidden = matches > 0;
+      clear.hidden = search.value === '';
     }
 
     function press(buttons, pressed) {
@@ -28,7 +30,17 @@
       });
     }
 
+    function clearSearch() {
+      search.value = '';
+      filter();
+      search.focus();
+    }
+
     search.addEventListener('input', filter);
+    search.addEventListener('keydown', function(event) {
+      if (event.key === 'Escape' && search.value) { clearSearch(); }
+    });
+    clear.addEventListener('click', clearSearch);
 
     var categoryButtons = wall.querySelectorAll('[data-category]:not(.footprint-card)');
     Array.prototype.forEach.call(categoryButtons, function(button) {

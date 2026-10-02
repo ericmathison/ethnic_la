@@ -6,7 +6,9 @@
 - viewbox = "0 0 #{Footprint::WIDTH} #{Footprint::HEIGHT}"
 - categories = local_assigns.fetch(:categories, [])
 .browse-controls
-  %input.form-control#footprint-search{ type: 'search', placeholder: 'Search', aria: { label: 'Search' } }
+  .footprint-search
+    %input.form-control#footprint-search{ type: 'search', placeholder: 'Search', aria: { label: 'Search' } }
+    %button.footprint-search-clear#footprint-search-clear{ type: 'button', hidden: true, aria: { label: 'Clear search' } } ×
   .btn-group{ role: 'group', aria: { label: 'Sort' } }
     %button.btn.btn-sm.btn-outline-secondary.active{ type: 'button', data: { sort: 'size' }, aria: { pressed: 'true' } } Largest
     %button.btn.btn-sm.btn-outline-secondary{ type: 'button', data: { sort: 'name' }, aria: { pressed: 'false' } } A–Z
