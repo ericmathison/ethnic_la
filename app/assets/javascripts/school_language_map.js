@@ -103,8 +103,11 @@
     });
     document.addEventListener('turbolinks:before-render', stopPlaying, { once: true });
 
-    var select = document.getElementById('school-language-select');
-    select.addEventListener('change', function() { select.form.submit(); });
+    // Type-to-search picker. Chosen triggers jQuery change events, not native ones.
+    var select = $('#school-language-select');
+    select.chosen({ search_contains: true, width: '100%', no_results_text: 'No language matches' });
+    select.on('change', function() { select.closest('form').submit(); });
+    document.addEventListener('turbolinks:before-cache', function() { select.chosen('destroy'); }, { once: true });
 
     renderTable();
     if (typeof mapboxgl === 'undefined') { return; }
