@@ -1,6 +1,6 @@
 module ApplicationHelper
   def show_footer?
-    return true unless %w[sessions passwords].include?(controller_name)
+    return true unless controller_name == 'sessions'
     return false
   end
 
