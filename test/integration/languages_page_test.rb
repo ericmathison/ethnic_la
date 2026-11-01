@@ -15,4 +15,9 @@ class LanguagesPageTest < ActionDispatch::IntegrationTest
     assert_select "a:match('href', ?)", ethnic_church_path(ethnic_churches(:bazquux))
   end
 
+  test 'unknown language returns not found' do
+    get language_path(id: 0)
+
+    assert_response :not_found
+  end
 end
