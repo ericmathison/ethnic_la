@@ -8,6 +8,6 @@ class ContentSecurityPolicyTest < ActionDispatch::IntegrationTest
     assert_includes policy, "default-src 'self'"
     assert_includes policy, "object-src 'none'"
     assert_includes policy, "frame-ancestors 'none'"
-    assert_includes policy, "script-src 'self' https://api.tiles.mapbox.com;"
+    assert_includes policy, "script-src 'self' https://api.mapbox.com;"
   end
 end

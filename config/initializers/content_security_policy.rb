@@ -11,9 +11,9 @@ Rails.application.configure do
     policy.form_action :self
     policy.frame_ancestors :none
     policy.object_src  :none
-    policy.script_src  :self, 'https://api.tiles.mapbox.com'
+    policy.script_src  :self, 'https://api.mapbox.com'
     # Mapbox GL and Bootstrap set inline styles.
-    policy.style_src   :self, :unsafe_inline, 'https://api.tiles.mapbox.com', 'https://fonts.googleapis.com'
+    policy.style_src   :self, :unsafe_inline, 'https://api.mapbox.com', 'https://fonts.googleapis.com'
     policy.font_src    :self, 'https://fonts.gstatic.com'
     policy.img_src     :self, :data, :blob, 'https://*.mapbox.com'
     policy.connect_src :self, 'https://*.mapbox.com'
